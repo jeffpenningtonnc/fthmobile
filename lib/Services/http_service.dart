@@ -1,5 +1,5 @@
-import '/Services/account_service.dart';
-import '/Util/globals.dart';
+import 'account_service.dart';
+import '../Util/globals.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '/Services/account_service.dart';
-import '/Views/donate_view.dart';
-import '/Views/library_view.dart';
-import '/Views/subscribed_view.dart';
-import '/Widget/header.dart';
+import '../Services/account_service.dart';
+import 'donate_view.dart';
+import 'library_view.dart';
+import 'subscribed_view.dart';
+import '../Widget/header.dart';
 import 'home_view.dart';
 import 'login_view.dart';
 import 'news_view.dart';

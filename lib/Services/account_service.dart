@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '/Services/http_service.dart';
+import 'http_service.dart';
 
 class AccountService {
 

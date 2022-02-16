@@ -1,4 +1,4 @@
-import '/Services/http_service.dart';
+import 'http_service.dart';
 
 class EventService {
 

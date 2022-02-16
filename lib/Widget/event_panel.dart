@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/Views/event_view.dart';
+import '../Views/event_view.dart';
 
 class EventsPanel extends StatefulWidget {
   const EventsPanel(Key key, this.events) : super(key: key);

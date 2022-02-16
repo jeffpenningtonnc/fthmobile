@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '/Util/globals.dart';
-import '/Widget/title_bar.dart';
+import '../Util/globals.dart';
+import '../Widget/title_bar.dart';
 
 class DonateView extends StatefulWidget {
   const DonateView({Key key, this.drawerKey}) : super(key: key);

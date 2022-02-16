@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '/Views/forgot_password3_view.dart';
-import '/Widget/error_box.dart';
-import '/Widget/spinner.dart';
-import '/Services/account_service.dart';
-import '/Services/preference_service.dart';
+import 'forgot_password3_view.dart';
+import '../Widget/error_box.dart';
+import '../Widget/spinner.dart';
+import '../Services/account_service.dart';
+import '../Services/preference_service.dart';
 
 class ForgotPassword2View extends StatefulWidget {
   const ForgotPassword2View({Key key, this.email, this.otp}) : super(key: key);
