@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '/Services/account_service.dart';
-import '/Services/event_service.dart';
-import '/Util/globals.dart';
-import '/Views/event_view.dart';
-import '/Views/subscribe_view.dart';
-import '/Widget/title_bar.dart';
-import '/Widget/white_spinner.dart';
+import '../Services/account_service.dart';
+import '../Services/event_service.dart';
+import '../Util/globals.dart';
+import 'event_view.dart';
+import 'subscribe_view.dart';
+import '../Widget/title_bar.dart';
+import '../Widget/white_spinner.dart';
 
 class SubscribedView extends StatefulWidget {
   const SubscribedView({Key key, this.drawerKey}) : super(key: key);

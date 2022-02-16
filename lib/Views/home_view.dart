@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/Widget/title_bar.dart';
+import '../Widget/title_bar.dart';
 import 'package:image_slider/image_slider.dart';
 
 class HomeView extends StatefulWidget {

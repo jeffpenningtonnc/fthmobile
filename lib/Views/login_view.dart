@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '/Widget/error_box.dart';
+import '../Widget/error_box.dart';
 import 'signup1_view.dart';
-import '/Services/account_service.dart';
-import '/Services/preference_service.dart';
-import '/Views/application_view.dart';
-import '/Views/forgot_password1_view.dart';
-import '/Widget/spinner.dart';
+import '../Services/account_service.dart';
+import '../Services/preference_service.dart';
+import 'application_view.dart';
+import 'forgot_password1_view.dart';
+import '../Widget/spinner.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key key, this.title}) : super(key: key);

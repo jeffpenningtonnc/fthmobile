@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/Views/login_view.dart';
+import 'login_view.dart';
 
 class ForgotPassword3View extends StatefulWidget {
   const ForgotPassword3View({Key key}) : super(key: key);

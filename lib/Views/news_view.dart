@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '/Services/promotions_service.dart';
-import '/Util/globals.dart';
-import '/Widget/title_bar.dart';
-import '/Widget/white_spinner.dart';
+import '../Services/promotions_service.dart';
+import '../Util/globals.dart';
+import '../Widget/title_bar.dart';
+import '../Widget/white_spinner.dart';
 
 class NewsView extends StatefulWidget {
   const NewsView({Key key, this.drawerKey}) : super(key: key);

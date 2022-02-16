@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import '/Widget/error_box.dart';
+import '../Widget/error_box.dart';
 import 'otp_view.dart';
-import '/Services/account_service.dart';
-import '/Views/otp_view.dart';
-import '/Widget/spinner.dart';
+import '../Services/account_service.dart';
+import '../Widget/spinner.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({Key key, this.title}) : super(key: key);

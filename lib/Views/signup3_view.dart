@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Services/account_service.dart';
 import '../Widget/spinner.dart';
-import '/Views/signup4_view.dart';
-import '/Services/preference_service.dart';
+import 'signup4_view.dart';
+import '../Services/preference_service.dart';
 
 class Signup3View extends StatefulWidget {
   const Signup3View({Key key, this.email, this.otp}) : super(key: key);

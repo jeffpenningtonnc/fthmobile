@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '/Services/account_service.dart';
-import '/Services/event_service.dart';
-import '/Widget/subscribe_icon.dart';
+import '../Services/account_service.dart';
+import '../Services/event_service.dart';
+import '../Widget/subscribe_icon.dart';
 
 class SubscribeView extends StatefulWidget {
   const SubscribeView({Key key}) : super(key: key);

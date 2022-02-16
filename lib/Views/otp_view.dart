@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '/Views/forgot_password2_view.dart';
-import '/Views/signup2_view.dart';
-import '/Widget/error_box.dart';
-import '/Widget/spinner.dart';
-import '/Services/account_service.dart';
+import '../Views/forgot_password2_view.dart';
+import '../Views/signup2_view.dart';
+import '../Widget/error_box.dart';
+import '../Widget/spinner.dart';
+import '../Services/account_service.dart';
 
 class OTPView extends StatefulWidget {
   const OTPView({Key key, this.email, this.action}) : super(key: key);

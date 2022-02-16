@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '/Views/signup3_view.dart';
-import '/Widget/error_box.dart';
-import '/Widget/spinner.dart';
-import '/Services/account_service.dart';
+import 'signup3_view.dart';
+import '../Widget/error_box.dart';
+import '../Widget/spinner.dart';
+import '../Services/account_service.dart';
 
 class Signup2View extends StatefulWidget {
   const Signup2View({Key key, this.email, this.otp}) : super(key: key);

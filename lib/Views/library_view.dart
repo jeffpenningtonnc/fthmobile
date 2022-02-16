@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/Widget/title_bar.dart';
+import '../Widget/title_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LibraryView extends StatefulWidget {
