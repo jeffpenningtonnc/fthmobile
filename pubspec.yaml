@@ -1,6 +1,6 @@
 name: fthmobile
 description: FTH
-version: 1.0.0+2
+version: 1.0.0+3
 environment:
   sdk: ">=2.1.0 <3.0.0"
 dependencies:
