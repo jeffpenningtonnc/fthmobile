@@ -81,9 +81,7 @@ class _LoginViewState extends State<LoginView> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'https://admin.feedthehungerapp.com/images/fthbackground.png',
-            ),
+            image: AssetImage("images/fthbackground.png"),
             fit: BoxFit.cover,
           ),
         ),

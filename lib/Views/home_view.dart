@@ -21,11 +21,18 @@ class _HomeViewState extends State<HomeView>
 
   TabController tabController;
 
+  // static List<String> links = [
+  //   "https://admin.feedthehungerapp.com/images/slider/slider1.png",
+  //   "https://admin.feedthehungerapp.com/images/slider/slider2.png",
+  //   "https://admin.feedthehungerapp.com/images/slider/slider3.png",
+  //   "https://admin.feedthehungerapp.com/images/slider/slider4.png"
+  // ];
+
   static List<String> links = [
-    "https://admin.feedthehungerapp.com/images/slider/slider1.png",
-    "https://admin.feedthehungerapp.com/images/slider/slider2.png",
-    "https://admin.feedthehungerapp.com/images/slider/slider3.png",
-    "https://admin.feedthehungerapp.com/images/slider/slider4.png"
+    "images/slider1.png",
+    "images/slider2.png",
+    "images/slider3.png",
+    "images/slider4.png"
   ];
 
   @override
@@ -73,7 +80,7 @@ class _HomeViewState extends State<HomeView>
               /// If manual sliding is required
               allowManualSlide: true,
               children: links.map((String link) {
-                return Image.network(
+                return Image.asset(
                   link,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.fitWidth,
@@ -99,8 +106,8 @@ class _HomeViewState extends State<HomeView>
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/slider/home-bottom.png",
+                    child: Image.asset(
+                        "images/home-bottom.png",
                     ),
                   ),
                 ),
