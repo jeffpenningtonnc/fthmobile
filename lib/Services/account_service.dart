@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'http_service.dart';
+import 'preference_service.dart';
 
 class AccountService {
 
@@ -52,6 +53,16 @@ class AccountService {
     return true;
   }
 
+  static void logOut() {
+    userId = 0;
+    userEmail = "";
+    firstName = "";
+    lastName = "";
+
+    PreferenceService.setPrefAsString("email", "");
+    PreferenceService.setPrefAsString("password", "");
+  }
+
   static Future<int> forgotPasswordUsingOTP(String email) async {
 
     email = email.trim();
@@ -88,15 +99,27 @@ class AccountService {
     return response['statusCode'];
   }
 
-  static Future<bool> updateAccount(String otp, String firstName, String lastName) async {
+  static Future<bool> updateAccount(String otp, String firstName,
+      String lastName, String address, String city, String state, String zip,
+      String mobile) async {
 
     firstName = firstName.trim();
     lastName = lastName.trim();
+    address = address.trim();
+    city = city.trim();
+    state = state.trim();
+    zip = zip.trim();
+    mobile = mobile.trim();
 
     Map<String, String> parameters = {
       'otp': otp,
       'firstName': firstName,
-      'lastName': lastName
+      'lastName': lastName,
+      'address': address,
+      'city': city,
+      'state': state,
+      'zip': zip,
+      'mobile': mobile
     };
 
     dynamic response = await HttpService.api('UpdateAccount', parameters);
@@ -130,7 +153,6 @@ class AccountService {
   }
 
   static Future<int> registerUsingOTP(String email) async {
-
     email = email.trim();
 
     Map<String, String> parameters = {

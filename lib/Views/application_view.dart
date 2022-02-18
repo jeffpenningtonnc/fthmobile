@@ -80,33 +80,36 @@ class _ApplicationViewState extends State<ApplicationView> {
                 color: Colors.black,
               ),
             ),
-            ListTile(
-              title: Row(
-                children: const <Widget>[Icon(Icons.person), Text("Profile")],
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginView()),
-                );
-              },
-            ),
-            ListTile(
-              title: Row(
-                children: const <Widget>[Icon(Icons.lock), Text("Change Password")],
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginView()),
-                );
-              },
-            ),
+            // ListTile(
+            //   title: Row(
+            //     children: const <Widget>[Icon(Icons.person), Text("Profile")],
+            //   ),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const LoginView()),
+            //     );
+            //   },
+            // ),
+            // ListTile(
+            //   title: Row(
+            //     children: const <Widget>[Icon(Icons.lock), Text("Change Password")],
+            //   ),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const LoginView()),
+            //     );
+            //   },
+            // ),
             ListTile(
               title: Row(
                 children: const <Widget>[Icon(Icons.exit_to_app), Text("Logout")],
               ),
               onTap: () {
+
+                AccountService.logOut();
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginView()),

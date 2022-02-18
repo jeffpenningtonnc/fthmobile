@@ -22,10 +22,10 @@ class _HomeViewState extends State<HomeView>
   TabController tabController;
 
   static List<String> links = [
-    "https://fth.jeffpenningtonnc.com/images/slider/slider1.png",
-    "https://fth.jeffpenningtonnc.com/images/slider/slider2.png",
-    "https://fth.jeffpenningtonnc.com/images/slider/slider3.png",
-    "https://fth.jeffpenningtonnc.com/images/slider/slider4.png"
+    "https://admin.feedthehungerapp.com/images/slider/slider1.png",
+    "https://admin.feedthehungerapp.com/images/slider/slider2.png",
+    "https://admin.feedthehungerapp.com/images/slider/slider3.png",
+    "https://admin.feedthehungerapp.com/images/slider/slider4.png"
   ];
 
   @override
@@ -100,7 +100,7 @@ class _HomeViewState extends State<HomeView>
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Image.network(
-                        "https://fth.jeffpenningtonnc.com/images/slider/home-bottom.png",
+                        "https://admin.feedthehungerapp.com/images/slider/home-bottom.png",
                     ),
                   ),
                 ),

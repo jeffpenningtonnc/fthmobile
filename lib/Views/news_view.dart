@@ -23,50 +23,13 @@ class _NewsViewState extends State<NewsView> {
             TitleBar(widget.key, "News"),
             Container(
               height: 5,
-              color: Colors.black,
+              color: Colors.white,
             ),
             Expanded(
                 child: Container(
-                  color: Colors.black,
-                  child: Center(
-                    child: FutureBuilder(
-                        future: PromotionsService.getPromotions(),
-                        builder: (context, response) {
-                          if (response.connectionState == ConnectionState.waiting) {
-                            return WhiteSpinner(widget.key);
-                          }
-
-                          if (response.data == null || response.data.length == 0) {
-                            return const Text("No new announcements!");
-                          }
-
-                          return ListView.builder(
-                              itemCount: response.data.length,
-                              itemBuilder: (context, index) {
-                                dynamic data = response.data[index];
-                                String url = Globals.getResource(data["FileName"], 256);
-
-                                return Padding(
-                                  padding: const EdgeInsets.fromLTRB(12,4,12,4),
-                                  child: Card(
-                                    color: const Color.fromRGBO(100, 100, 100, 100),
-                                      child: ListTile (
-                                        title: Image.network(url),
-                                        onTap: () async {
-
-                                          if (await canLaunch(data["ExternalUrl"])) {
-                                            await launch(data["ExternalUrl"]);
-                                          } else {
-                                            throw 'Could not launch $url';
-                                          }
-
-                                        },
-                                      )
-                                  ),
-                                );
-                              }
-                          );
-                        }
+                  color: Colors.white,
+                  child: const Center(
+                    child: Text("(Coming EOD)"
                     ),
                   ),
                 )

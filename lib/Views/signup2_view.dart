@@ -236,7 +236,7 @@ class _Signup2ViewState extends State<Signup2View> {
                   ),
                 ),
                 Visibility(
-                  visible: _busy,
+                  visible: _busy && _errorMessage.isNotEmpty,
                   child: SizedBox(
                     height: 40,
                     child: ErrorBox(errorMsg: _errorMessage),

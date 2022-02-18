@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Services/account_service.dart';
+import '../Widget/error_box.dart';
 import '../Widget/spinner.dart';
 import 'signup4_view.dart';
 import '../Services/preference_service.dart';
@@ -16,7 +17,8 @@ class Signup3View extends StatefulWidget {
 
 class _Signup3ViewState extends State<Signup3View> {
   bool _busy = false;
-  String _value = "NC";
+  String _selectedState = "";
+  String _errorMessage = "";
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -156,113 +158,114 @@ class _Signup3ViewState extends State<Signup3View> {
                       child: DropdownButtonFormField<String>(
                         items: const [
                           DropdownMenuItem<String>(
-                              child: Text('Alabama'), value: 'AL'),
+                              child: Text('Select State'), value: ''),
                           DropdownMenuItem<String>(
-                              child: Text('Alaska'), value: 'AK'),
+                              child: Text('Alabama'), value: 'Alabama'),
                           DropdownMenuItem<String>(
-                              child: Text('Arizona'), value: 'AR'),
+                              child: Text('Alaska'), value: 'Alaska'),
                           DropdownMenuItem<String>(
-                              child: Text('Arkansas'), value: 'AR'),
+                              child: Text('Arizona'), value: 'Arizona'),
                           DropdownMenuItem<String>(
-                              child: Text('California'), value: 'CA'),
+                              child: Text('Arkansas'), value: 'Arkansas'),
                           DropdownMenuItem<String>(
-                              child: Text('Colorado'), value: 'CO'),
+                              child: Text('California'), value: 'California'),
                           DropdownMenuItem<String>(
-                              child: Text('Connecticut'), value: 'CT'),
+                              child: Text('Colorado'), value: 'Colorado'),
                           DropdownMenuItem<String>(
-                              child: Text('Delaware'), value: 'DE'),
+                              child: Text('Connecticut'), value: 'Connecticut'),
                           DropdownMenuItem<String>(
-                              child: Text('Florida'), value: 'FL'),
+                              child: Text('Delaware'), value: 'Delaware'),
                           DropdownMenuItem<String>(
-                              child: Text('Georgia'), value: 'GA'),
+                              child: Text('Florida'), value: 'Florida'),
                           DropdownMenuItem<String>(
-                              child: Text('Hawaii'), value: 'HI'),
+                              child: Text('Georgia'), value: 'Georgia'),
                           DropdownMenuItem<String>(
-                              child: Text('Idaho'), value: 'ID'),
+                              child: Text('Hawaii'), value: 'Hawaii'),
                           DropdownMenuItem<String>(
-                              child: Text('Illinois'), value: 'IL'),
+                              child: Text('Idaho'), value: 'Idaho'),
                           DropdownMenuItem<String>(
-                              child: Text('Indiana'), value: 'IN'),
+                              child: Text('Illinois'), value: 'Illinois'),
                           DropdownMenuItem<String>(
-                              child: Text('Iowa'), value: 'IA'),
+                              child: Text('Indiana'), value: 'Indiana'),
                           DropdownMenuItem<String>(
-                              child: Text('Kansas'), value: 'KS'),
+                              child: Text('Iowa'), value: 'Iowa'),
                           DropdownMenuItem<String>(
-                              child: Text('Kentucky'), value: 'KY'),
+                              child: Text('Kansas'), value: 'Kansas'),
                           DropdownMenuItem<String>(
-                              child: Text('Louisiana'), value: 'LA'),
+                              child: Text('Kentucky'), value: 'Kentucky'),
                           DropdownMenuItem<String>(
-                              child: Text('Maine'), value: 'ME'),
+                              child: Text('Louisiana'), value: 'Louisiana'),
                           DropdownMenuItem<String>(
-                              child: Text('Maryland'), value: 'MD'),
+                              child: Text('Maine'), value: 'Maine'),
                           DropdownMenuItem<String>(
-                              child: Text('Massachusetts'), value: 'MA'),
+                              child: Text('Maryland'), value: 'Maryland'),
                           DropdownMenuItem<String>(
-                              child: Text('Michigan'), value: 'MI'),
+                              child: Text('Massachusetts'), value: 'Massachusetts'),
                           DropdownMenuItem<String>(
-                              child: Text('Minnesota'), value: 'MN'),
+                              child: Text('Michigan'), value: 'Michigan'),
                           DropdownMenuItem<String>(
-                              child: Text('Mississippi'), value: 'MS'),
+                              child: Text('Minnesota'), value: 'Minnesota'),
                           DropdownMenuItem<String>(
-                              child: Text('Missouri'), value: 'MO'),
+                              child: Text('Mississippi'), value: 'Mississippi'),
                           DropdownMenuItem<String>(
-                              child: Text('Montana'), value: 'MT'),
+                              child: Text('Missouri'), value: 'Missouri'),
                           DropdownMenuItem<String>(
-                              child: Text('Nebraska'), value: 'NE'),
+                              child: Text('Montana'), value: 'Montana'),
                           DropdownMenuItem<String>(
-                              child: Text('Nevada'), value: 'NV'),
+                              child: Text('Nebraska'), value: 'Nebraska'),
                           DropdownMenuItem<String>(
-                              child: Text('New Hampshire'), value: 'NH'),
+                              child: Text('Nevada'), value: 'Nevada'),
                           DropdownMenuItem<String>(
-                              child: Text('New Jersey'), value: 'NJ'),
+                              child: Text('New Hampshire'), value: 'New Hampshire'),
                           DropdownMenuItem<String>(
-                              child: Text('New Mexico'), value: 'NM'),
+                              child: Text('New Jersey'), value: 'New Jersey'),
                           DropdownMenuItem<String>(
-                              child: Text('New York'), value: 'NY'),
+                              child: Text('New Mexico'), value: 'New Mexico'),
                           DropdownMenuItem<String>(
-                              child: Text('North Carolina'), value: 'NC'),
+                              child: Text('New York'), value: 'New York'),
                           DropdownMenuItem<String>(
-                              child: Text('North Dakota'), value: 'ND'),
+                              child: Text('North Carolina'), value: 'North Carolina'),
                           DropdownMenuItem<String>(
-                              child: Text('Ohio'), value: 'OH'),
+                              child: Text('North Dakota'), value: 'North Dakota'),
                           DropdownMenuItem<String>(
-                              child: Text('Oklahoma'), value: 'OK'),
+                              child: Text('Ohio'), value: 'Ohio'),
                           DropdownMenuItem<String>(
-                              child: Text('Oregon'), value: 'OR'),
+                              child: Text('Oklahoma'), value: 'Oklahoma'),
                           DropdownMenuItem<String>(
-                              child: Text('Pennsylvania'), value: 'PA'),
+                              child: Text('Oregon'), value: 'Oregon'),
                           DropdownMenuItem<String>(
-                              child: Text('Rhode Island'), value: 'RI'),
+                              child: Text('Pennsylvania'), value: 'Pennsylvania'),
                           DropdownMenuItem<String>(
-                              child: Text('South Carolina'), value: 'SC'),
+                              child: Text('Rhode Island'), value: 'Rhode Island'),
                           DropdownMenuItem<String>(
-                              child: Text('South Dakota'), value: 'SD'),
+                              child: Text('South Carolina'), value: 'South Carolina'),
                           DropdownMenuItem<String>(
-                              child: Text('Tennessee'), value: 'TN'),
+                              child: Text('South Dakota'), value: 'South Dakota'),
                           DropdownMenuItem<String>(
-                              child: Text('Texas'), value: 'TX'),
+                              child: Text('Tennessee'), value: 'Tennessee'),
                           DropdownMenuItem<String>(
-                              child: Text('Utah'), value: 'UT'),
+                              child: Text('Texas'), value: 'Texas'),
                           DropdownMenuItem<String>(
-                              child: Text('Vermont'), value: 'VT'),
+                              child: Text('Utah'), value: 'Utah'),
                           DropdownMenuItem<String>(
-                              child: Text('Virginia'), value: 'VA'),
+                              child: Text('Vermont'), value: 'Vermont'),
                           DropdownMenuItem<String>(
-                              child: Text('Washington'), value: 'WA'),
+                              child: Text('Virginia'), value: 'Virginia'),
                           DropdownMenuItem<String>(
-                              child: Text('West Virginia'), value: 'WV'),
+                              child: Text('Washington'), value: 'Washington'),
                           DropdownMenuItem<String>(
-                              child: Text('Wisconsin'), value: 'WI'),
+                              child: Text('West Virginia'), value: 'West Virginia'),
                           DropdownMenuItem<String>(
-                              child: Text('Wyoming'), value: 'WY'),
+                              child: Text('Wisconsin'), value: 'Wisconsin'),
+                          DropdownMenuItem<String>(
+                              child: Text('Wyoming'), value: 'Wyoming'),
                         ],
                         onChanged: (String value) {
                           setState(() {
-                            _value = value;
+                            _selectedState = value;
                           });
                         },
-                        hint: const Text('Select State'),
-                        value: _value,
+                        value: _selectedState,
                         decoration: InputDecoration(
                           contentPadding:
                               const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
@@ -328,7 +331,17 @@ class _Signup3ViewState extends State<Signup3View> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                Visibility(
+                  visible: !_busy && _errorMessage.isNotEmpty,
+                  child: SizedBox(
+                    height: 40,
+                    child: ErrorBox(errorMsg: _errorMessage),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -344,13 +357,37 @@ class _Signup3ViewState extends State<Signup3View> {
                           if (_busy) return;
 
                           setState(() {
+                            _errorMessage = "";
+                          });
+
+                          String firstName = firstNameController.text;
+                          String lastName = lastNameController.text;
+                          String address =  addressController.text;
+                          String city =  cityController.text;
+                          String state =  _selectedState;
+                          String zip =  zipController.text;
+                          String mobile =  mobileController.text;
+
+                          if (firstName.isEmpty || lastName.isEmpty
+                              || address.isEmpty || city.isEmpty
+                              || state.isEmpty || zip.isEmpty || mobile.isEmpty ) {
+                            setState(() {
+                              _errorMessage = "Please complete all fields above.";
+                            });
+                            return;
+                          }
+
+                          setState(() {
                             _busy = true;
+                            _errorMessage = "";
                           });
 
                           await PreferenceService.setPrefAsString("email", widget.email);
 
                           bool accountUpdated =
-                          await AccountService.updateAccount(widget.otp, firstNameController.text, lastNameController.text);
+                          await AccountService.updateAccount(widget.otp,
+                              firstName, lastName, address, city, state, zip,
+                              mobile);
 
                           setState(() {
                             _busy = false;
