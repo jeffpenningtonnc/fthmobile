@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fthmobile/Util/globals.dart';
 
 class Header extends StatefulWidget {
   const Header(Key key, this._drawerKey) : super(key: key);
@@ -52,7 +53,7 @@ class _HeaderState extends State<Header> {
               const SizedBox(height: 40),
               Center(
                 child: Image.asset(
-                  "images/logo.png",
+                  logoLocation,
                   fit: BoxFit.contain,
                 ),
               ),

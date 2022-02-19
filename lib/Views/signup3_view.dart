@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Services/account_service.dart';
+import '../Util/globals.dart';
 import '../Widget/error_box.dart';
 import '../Widget/spinner.dart';
 import 'signup4_view.dart';
@@ -35,9 +36,7 @@ class _Signup3ViewState extends State<Signup3View> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'http://fth.jeffpenningtonnc.com/images/fthbackground.png',
-            ),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),

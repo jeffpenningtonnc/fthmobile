@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_view.dart';
+import '../Util/globals.dart';
 
 class Signup4View extends StatefulWidget {
   const Signup4View({Key key}) : super(key: key);
@@ -17,9 +18,7 @@ class _Signup4ViewState extends State<Signup4View> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'http://fth.jeffpenningtonnc.com/images/fthbackground.png',
-            ),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),

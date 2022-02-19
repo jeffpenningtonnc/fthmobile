@@ -29,10 +29,10 @@ class _HomeViewState extends State<HomeView>
   // ];
 
   static List<String> links = [
-    "images/slider1.png",
-    "images/slider2.png",
-    "images/slider3.png",
-    "images/slider4.png"
+    "images/slider/slider1.png",
+    "images/slider/slider2.png",
+    "images/slider/slider3.png",
+    "images/slider/slider4.png"
   ];
 
   @override

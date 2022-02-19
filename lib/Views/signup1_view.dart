@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import '../Util/globals.dart';
 import '../Widget/error_box.dart';
 import 'otp_view.dart';
 import '../Services/account_service.dart';
@@ -27,9 +28,7 @@ class _SignupViewState extends State<SignupView> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'http://fth.jeffpenningtonnc.com/images/fthbackground.png',
-            ),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),

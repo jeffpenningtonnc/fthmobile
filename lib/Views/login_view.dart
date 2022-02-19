@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../Util/globals.dart';
 import '../Widget/error_box.dart';
 import 'signup1_view.dart';
 import '../Services/account_service.dart';
@@ -81,7 +82,7 @@ class _LoginViewState extends State<LoginView> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/fthbackground.png"),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),

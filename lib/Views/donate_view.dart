@@ -20,7 +20,7 @@ class _DonateViewState extends State<DonateView> {
       body: Column(
         children: <Widget>[
           TitleBar(widget.key, "How to Donate"),
-          Image.network("https://fth.jeffpenningtonnc.com/images/donate.png"),
+          Image.asset("images/donate.png"),
           Container(
             decoration: const BoxDecoration(
               color: Colors.black,

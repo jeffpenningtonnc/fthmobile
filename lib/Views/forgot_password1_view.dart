@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import '../Services/account_service.dart';
+import '../Util/globals.dart';
 import 'otp_view.dart';
 import '../Widget/error_box.dart';
 import '../Widget/spinner.dart';
@@ -28,9 +29,7 @@ class _ForgotPassword1ViewState extends State<ForgotPassword1View> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'http://fth.jeffpenningtonnc.com/images/fthbackground.png',
-            ),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),
@@ -44,7 +43,7 @@ class _ForgotPassword1ViewState extends State<ForgotPassword1View> {
                 ),
                 Center(
                   child: Image.asset(
-                    "images/logo.png",
+                    logoLocation,
                     fit: BoxFit.contain,
                   ),
                 ),

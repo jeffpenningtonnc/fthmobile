@@ -57,7 +57,7 @@ class _EventViewState extends State<EventView> {
                   ),
                   endChild: _RightChild(
                     drawerKey: widget.drawerKey,
-                    asset: 'http://fth.jeffpenningtonnc.com/images/packing.png',
+                    asset: "images/status/packing.png",
                     title: 'Packing',
                     message: 'Upcoming or in progress',
                   ),
@@ -75,7 +75,7 @@ class _EventViewState extends State<EventView> {
                   ),
                   endChild: const _RightChild(
                     asset:
-                        'http://fth.jeffpenningtonnc.com/images/warehouse.png',
+                        '/images/status/warehouse.png',
                     title: 'Warehouse',
                     message: 'Loading trucks for delivery',
                   ),
@@ -93,7 +93,7 @@ class _EventViewState extends State<EventView> {
                   ),
                   endChild: const _RightChild(
                     asset:
-                        'http://fth.jeffpenningtonnc.com/images/shipping.png',
+                        'images/status/shipping.png',
                     title: 'Shipping',
                     message: 'Transporting to destination',
                   ),
@@ -116,7 +116,7 @@ class _EventViewState extends State<EventView> {
                   endChild: const _RightChild(
                     disabled: true,
                     asset:
-                        'http://fth.jeffpenningtonnc.com/images/complete.png',
+                        '/images/status/complete.png',
                     title: 'Complete',
                     message: 'Food has been delivered',
                   ),

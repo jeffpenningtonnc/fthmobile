@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'Views/login_view.dart';
 
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
-  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(const MyApp());
 }

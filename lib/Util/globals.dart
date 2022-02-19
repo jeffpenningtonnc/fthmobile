@@ -15,6 +15,9 @@ const String donationHtml = """
  of the Evangelical Council for Financial Accountability.</p>
 """;
 
+const String backgroundLocation = "images/background.png";
+const String logoLocation = "images/logo.png";
+
 class Globals {
 
   static String getAPIKey() {

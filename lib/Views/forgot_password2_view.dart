@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../Util/globals.dart';
 import 'forgot_password3_view.dart';
 import '../Widget/error_box.dart';
 import '../Widget/spinner.dart';
@@ -31,9 +32,7 @@ class _ForgotPassword2ViewState extends State<ForgotPassword2View> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'http://fth.jeffpenningtonnc.com/images/fthbackground.png',
-            ),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Util/globals.dart';
 import '../Views/forgot_password2_view.dart';
 import '../Views/signup2_view.dart';
 import '../Widget/error_box.dart';
@@ -28,9 +29,7 @@ class _OTPViewState extends State<OTPView> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              'http://fth.jeffpenningtonnc.com/images/fthbackground.png',
-            ),
+            image: AssetImage(backgroundLocation),
             fit: BoxFit.cover,
           ),
         ),
