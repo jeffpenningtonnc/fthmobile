@@ -24,6 +24,11 @@ class _SignupViewState extends State<SignupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Registration'),
+        backgroundColor: const Color.fromARGB(192, 50, 50, 50),
+        centerTitle: true,
+      ),
       body: Container(
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(

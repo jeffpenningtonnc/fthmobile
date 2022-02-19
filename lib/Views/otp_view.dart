@@ -25,6 +25,11 @@ class _OTPViewState extends State<OTPView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('One Time Password'),
+        backgroundColor: const Color.fromARGB(192, 50, 50, 50),
+        centerTitle: true,
+      ),
       body: Container(
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
