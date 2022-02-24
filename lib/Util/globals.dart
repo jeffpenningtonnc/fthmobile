@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 const String apiKey = "7g84VnefBmzR7QjN";
 
 const String serverDomain = "https://admin.feedthehungerapp.com";
 const String mobileApi = serverDomain + "/api/mobile/";
 const String resourcePath = serverDomain + "/api/uploads/";
-const String donationUrl = "https://www.feedthehunger.org/donate";
+const String donationUrl = "https://www.feedthehungerapp.com/donate.html";
 
 const String donationHtml = """
 <p>You have a hunger in your heart to make a difference in peoples’ lives, to make
@@ -19,6 +21,10 @@ const String backgroundLocation = "images/background.png";
 const String logoLocation = "images/logo.png";
 
 class Globals {
+
+  static Color getPrimaryColor() {
+    return const Color.fromARGB(255, 142, 197, 95);
+  }
 
   static String getAPIKey() {
     return apiKey;

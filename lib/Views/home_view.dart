@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../Widget/title_bar.dart';
 import 'package:image_slider/image_slider.dart';
 
@@ -20,6 +21,8 @@ class _HomeViewState extends State<HomeView>
   }
 
   TabController tabController;
+  WebViewController _controller;
+  bool _loading = true;
 
   // static List<String> links = [
   //   "https://admin.feedthehungerapp.com/images/slider/slider1.png",
@@ -38,84 +41,73 @@ class _HomeViewState extends State<HomeView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          TitleBar(widget.key, "Welcome!"),
-          Container(
-            color: Colors.black,
-            child: ImageSlider(
-              showTabIndicator: true,
+        body: Column(
+          children: <Widget>[
+            TitleBar(widget.key, "Welcome!"),
+            Container(
+              color: Colors.black,
+              child: ImageSlider(
+                showTabIndicator: false,
 
-              /// Customize tab's colors
-              tabIndicatorColor: Colors.white70,
+                /// Customize tab's colors
+                tabIndicatorColor: Colors.white70,
 
-              /// Customize selected tab's colors
-              tabIndicatorSelectedColor: Colors.yellow,
+                /// Customize selected tab's colors
+                tabIndicatorSelectedColor: Colors.yellow,
 
-              /// Height of the indicators from the bottom
-              tabIndicatorHeight: 16,
+                /// Height of the indicators from the bottom
+                tabIndicatorHeight: 16,
 
-              /// Size of the tab indicator circles
-              tabIndicatorSize: 16,
+                /// Size of the tab indicator circles
+                tabIndicatorSize: 16,
 
-              /// tabController for walkthrough or other implementations
-              tabController: tabController,
+                /// tabController for walkthrough or other implementations
+                tabController: tabController,
 
-              /// Animation curves of sliding
-              curve: Curves.easeIn,
+                /// Animation curves of sliding
+                curve: Curves.easeIn,
 
-              /// Width of the slider
-              width: MediaQuery.of(context).size.width,
+                /// Width of the slider
+                width: MediaQuery.of(context).size.width,
 
-              /// Height of the slider
-              height: 220,
+                /// Height of the slider
+                height: 220,
 
-              /// If automatic sliding is required
-              autoSlide: true,
+                /// If automatic sliding is required
+                autoSlide: true,
 
-              /// Time for automatic sliding
-              duration: const Duration(seconds: 6),
+                /// Time for automatic sliding
+                duration: const Duration(seconds: 6),
 
-              /// If manual sliding is required
-              allowManualSlide: true,
-              children: links.map((String link) {
-                return Image.asset(
-                  link,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fitWidth,
-                );
-              }).toList(),
+                /// If manual sliding is required
+                allowManualSlide: true,
+                children: links.map((String link) {
+                  return Image.asset(
+                    link,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.fitWidth,
+                  );
+                }).toList(),
+              ),
             ),
-          ),
-          Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 10,
-                width: double.infinity,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.black
-                  ),
-                ),
+            Expanded(
+              child: WebView(
+                initialUrl: 'https://mailchi.mp/feedthehunger/prayer-2-20-22',
+                javascriptMode: JavascriptMode.unrestricted,
+                onWebViewCreated: (WebViewController webViewController) {
+                  _controller = webViewController;
+                },
+                onPageFinished: (finish) {
+
+                  _controller.evaluateJavascript("document.getElementById('templatePreheader').remove(); ");
+
+                  setState(() {
+                    _loading = false;
+                  });
+                },
               ),
-              SizedBox(
-                child: DecoratedBox(
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Image.asset(
-                        "images/home-bottom.png",
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    ));
+            ),
+          ],
+        ));
   }
 }

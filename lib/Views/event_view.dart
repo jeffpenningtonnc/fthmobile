@@ -40,10 +40,10 @@ class _EventViewState extends State<EventView> {
                 ),
               ),
             )),
-        Container(color: Colors.black, height: 20),
+        Container(color: const Color.fromARGB(255, 230, 230, 230), height: 20),
         Expanded(
           child: Container(
-            color: Colors.black,
+            color: const Color.fromARGB(255, 230, 230, 230),
             child: Column(
               children: <Widget>[
                 TimelineTile(
@@ -75,7 +75,7 @@ class _EventViewState extends State<EventView> {
                   ),
                   endChild: const _RightChild(
                     asset:
-                        '/images/status/warehouse.png',
+                        'images/status/warehouse.png',
                     title: 'Warehouse',
                     message: 'Loading trucks for delivery',
                   ),
@@ -101,7 +101,7 @@ class _EventViewState extends State<EventView> {
                     color: Colors.lightGreen,
                   ),
                   afterLineStyle: const LineStyle(
-                    color: Color(0xFFDADADA),
+                    color: Colors.black26,
                   ),
                 ),
                 TimelineTile(
@@ -110,18 +110,18 @@ class _EventViewState extends State<EventView> {
                   isLast: true,
                   indicatorStyle: const IndicatorStyle(
                     width: 20,
-                    color: Color(0xFFDADADA),
+                    color: Colors.black26,
                     padding: EdgeInsets.all(6),
                   ),
                   endChild: const _RightChild(
                     disabled: true,
                     asset:
-                        '/images/status/complete.png',
+                        'images/status/complete.png',
                     title: 'Complete',
                     message: 'Food has been delivered',
                   ),
                   beforeLineStyle: const LineStyle(
-                    color: Color(0xFFDADADA),
+                    color: Colors.black26,
                   ),
                 ),
               ],
@@ -156,46 +156,32 @@ class _RightChild extends StatelessWidget {
       height: 75,
       child: Card(
         margin: const EdgeInsets.fromLTRB(5, 0, 20, 0),
-        color: const Color.fromRGBO(120, 120, 120, 0.6),
-        child: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => StepView(key, drawerKey)),
-            );
-          },
-          child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(8, 2, 6, 0),
-              leading: Opacity(
-                child: Image(
-                  image: NetworkImage(asset),
-                  width: 60,
-                ),
-                opacity: disabled ? 0.5 : 1,
+        color: Colors.white,
+        child: ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(8, 2, 6, 0),
+            leading: Opacity(
+              child: Image(
+                image: AssetImage(asset),
+                width: 60,
               ),
-              title: Opacity(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  opacity: disabled ? 0.5 : 1),
-              subtitle: Opacity(
+              opacity: disabled ? 0.5 : 1,
+            ),
+            title: Opacity(
                 child: Text(
-                  message,
-                  style: const TextStyle(color: Colors.white70),
+                  title,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                opacity: disabled ? 0.5 : 1,
+                opacity: disabled ? 0.5 : 1),
+            subtitle: Opacity(
+              child: Text(
+                message,
+                style: const TextStyle(color: Colors.black),
               ),
-              trailing: Opacity(
-                child: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white38,
-                ),
-                opacity: disabled ? 0.5 : 1,
-              )),
+              opacity: disabled ? 0.5 : 1,
+            ),
         ),
       ),
     );

@@ -2,7 +2,7 @@ name: fthmobile
 description: FTH
 version: 1.0.0+7
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
@@ -20,6 +20,10 @@ dependencies:
   image_slider: ^1.0.2
   cached_network_image: ^2.0.0
   flutter_native_splash: ^2.0.4
+  webview_flutter:
+  path_provider:
+  path:
+  image_picker: ^0.8.4+2
 dev_dependencies:
   flutter_lints: ^1.0.4
   flutter_test:

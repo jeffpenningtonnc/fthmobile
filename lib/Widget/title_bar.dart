@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Util/globals.dart';
+
 class TitleBar extends StatelessWidget {
   const TitleBar(Key key, this._title) : super(key: key);
   final String _title;
@@ -8,15 +10,12 @@ class TitleBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const SizedBox(
-            height: 5
-        ),
         SizedBox(
             height: 35,
             width: double.infinity,
             child: DecoratedBox(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 142, 197, 95),
+              decoration: BoxDecoration(
+                color: Globals.getPrimaryColor(),
               ),
               child: Center(
                 child: Text(

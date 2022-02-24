@@ -22,8 +22,8 @@ class _ApplicationViewState extends State<ApplicationView> {
 
   final List<Widget> _children = [
     HomeView(drawerKey: _drawerKey),
-    SubscribedView(drawerKey: _drawerKey),
     NewsView(drawerKey: _drawerKey),
+    SubscribedView(drawerKey: _drawerKey),
     LibraryView(drawerKey: _drawerKey),
     DonateView(drawerKey: _drawerKey),
   ];
@@ -139,12 +139,12 @@ class _ApplicationViewState extends State<ApplicationView> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: "Events",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.comment),
             label: "News",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            label: "Events",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.library_books),

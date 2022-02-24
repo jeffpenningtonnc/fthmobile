@@ -63,7 +63,7 @@ class _Signup2ViewState extends State<Signup2View> {
                   height: 20,
                 ),
                 const Text(
-                  "Please create your password below.  Passwords must be atleast six characters long.",
+                  "Please create your password below.  Passwords must be at least six characters long.",
                   style: TextStyle(fontSize: 18, color: Colors.black45),
                 ),
                 const SizedBox(

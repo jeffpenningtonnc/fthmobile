@@ -31,36 +31,6 @@ class _LoginViewState extends State<LoginView> {
     String email = await PreferenceService.getPrefAsString("email");
     String password = await PreferenceService.getPrefAsString("password");
 
-    /*if (email.isNotEmpty && password.isNotEmpty) {
-
-      setState(() {
-        _busy = true;
-      });
-
-      bool valid = await AccountService.authenticate(email, password);
-      if (valid) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const ApplicationView()),
-        );
-      } else {
-        setState(() {
-          _invalidLogin = true;
-        });
-      }
-
-      setState(() {
-        _busy = false;
-        _autoLoginBusy = false;
-      });
-    }
-    else {
-      setState(() {
-        _autoLoginBusy = false;
-      });
-    }*/
-
     setState(() {
       emailController.text = email;
       passwordController.text = password;

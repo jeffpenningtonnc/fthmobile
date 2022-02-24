@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../Util/globals.dart';
 import '../Widget/title_bar.dart';
 
@@ -14,69 +15,49 @@ class DonateView extends StatefulWidget {
 }
 
 class _DonateViewState extends State<DonateView> {
+  WebViewController _controller;
+  bool _loading = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          TitleBar(widget.key, "How to Donate"),
-          Image.asset("images/donate.png"),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.black,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Html(
-                backgroundColor: Colors.black,
-                defaultTextStyle: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15,
-                ),
-                data: Globals.getDonationContent()
+          TitleBar(widget.key, "Donate"),
+          Visibility(
+            visible: _loading,
+            child: Container(
+              color: Colors.white,
+              child: const SizedBox(
+                height: 100,
+                  child: Center(
+                      child: CircularProgressIndicator(),
+                  ),
               ),
             ),
           ),
           Expanded(
             child: Container(
+              height: _loading ? 0 : double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Material(
-                    elevation: 5.0,
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: const Color.fromARGB(255, 142, 197, 95),
-                    child: MaterialButton(
-                      minWidth: (MediaQuery.of(context).size.width) / 2,
-                      padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                      onPressed: () async {
-
-                        var url = Globals.getDonationsUrl();
-
-                        if (await canLaunch(url)) {
-                          await launch(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
-
-                      },
-                      child: const Text(
-                        "Donate Now",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              child: Center(
+                child: WebView(
+                  initialUrl: 'https://www.feedthehungerapp.com/donate.html',
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (WebViewController webViewController) {
+                    _controller = webViewController;
+                  },
+                  onPageFinished: (finish) {
+                    setState(() {
+                      _loading = false;
+                    });
+                  },
+                ),
               ),
             ),
-          )
+          ),
         ],
       )
     );

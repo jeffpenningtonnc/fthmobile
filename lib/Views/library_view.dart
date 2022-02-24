@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import '../Services/library_service.dart';
+import '../Util/globals.dart';
+import '../Widget/spinner.dart';
 import '../Widget/title_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'library_manage_view.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({Key key, this.drawerKey}) : super(key: key);
@@ -12,146 +16,125 @@ class LibraryView extends StatefulWidget {
 }
 
 class _LibraryViewState extends State<LibraryView> {
-  String dropdownValue = "All Items";
+  String dropdownValue = "Books";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: <Widget>[
-        TitleBar(widget.key, "Library"),
-        DropdownButton(
-          value: dropdownValue,
-          hint: const Text('Filter'),
-          icon: const Icon(Icons.arrow_drop_down),
-          onChanged: (String newValue) {
-            setState(() {
-              dropdownValue = newValue;
-            });
-          },
-          items: <String>['All Items', 'Subscribable', 'My Subscriptions']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
+        body: Container(
+      constraints: const BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(backgroundLocation),
+          fit: BoxFit.cover,
         ),
-        Expanded(
-            child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.black,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(0),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 20,
-              crossAxisCount: 2,
-              children: <Widget>[
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/AWordforAllOccasions_issuu-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/AWordforAllOccasions_issuu.pdf");
+      ),
+      child: Column(
+        children: <Widget>[
+          TitleBar(widget.key, "Library"),
+          Card(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                DropdownButton(
+                  value: dropdownValue,
+                  hint: const Text('Filter'),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                    });
                   },
+                  items: <String>['Books', 'Devotionals']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/DiggingDeeper_book-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/DiggingDeeper_book.pdf");
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LibraryManageView()),
+                    );
                   },
-                ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/Footprints_issuu-TH.png"),
+                  child: Row(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
+                        child: Icon(Icons.settings),
+                      ),
+                      Text("Manage Subscriptions")
+                    ],
                   ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/Footprints_issuu.pdf");
-                  },
-                ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/Terminus_book-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/Terminus_book.pdf");
-                  },
-                ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/TheBloodoftheSaints_book-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/TheBloodoftheSaints_book.pdf");
-                  },
-                ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/TheComingofChristos_book-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/TheComingofChristos_book.pdf");
-                  },
-                ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/TheJewishJesus_book_rev-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/TheJewishJesus_book_rev.pdf");
-                  },
-                ),
-                ListTile(
-                  title: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(100, 100, 100, 100)),
-                    child: Image.network(
-                        "https://admin.feedthehungerapp.com/images/books/thumbs/TheSearchforTruth_book-TH.png"),
-                  ),
-                  onTap: () async {
-                    await launch(
-                        "https://admin.feedthehungerapp.com/images/books/TheSearchforTruth_book.pdf");
-                  },
                 ),
               ],
             ),
           ),
-        )),
-      ],
+          Expanded(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder(
+                    future: LibraryService.getItems(0),
+                    builder: (context, response) {
+                      if (response.connectionState == ConnectionState.waiting) {
+                        return const Spinner();
+                      }
+                      if (response.data == null || response.data.length == 0) {
+                        return const Text("Library empty");
+                      }
+
+                      return GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 30,
+                          ),
+                          itemCount: response.data.length,
+                          shrinkWrap: false,
+                          itemBuilder: (context, index) {
+                            dynamic data = response.data[index];
+                            String url =
+                                "https://admin.feedthehungerapp.com/api/uploads/" +
+                                    data["ThumbFileName"] +
+                                    "_128";
+
+                            return ListTile(
+                              title: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(6),
+                                    image: DecorationImage(
+                                      image: NetworkImage(url),
+                                      fit: BoxFit.fill,
+                                    ),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Color.fromARGB(40, 0, 0, 0),
+                                        offset: Offset(
+                                          6.0,
+                                          6.0,
+                                        ),
+                                      )
+                                    ]),
+                              ),
+                              onTap: () async {
+                                await launch(
+                                    "https://admin.feedthehungerapp.com/api/uploads/" +
+                                        data["FileName"]);
+                              },
+                            );
+                          });
+                    }),
+              ),
+            ),
+          ),
+        ],
+      ),
     ));
   }
 }

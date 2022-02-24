@@ -50,7 +50,7 @@ class _Signup4ViewState extends State<Signup4View> {
                   height: 20,
                 ),
                 const Text(
-                  "You are Registered!",
+                  "You are registered!",
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.black45),
