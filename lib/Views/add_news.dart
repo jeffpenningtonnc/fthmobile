@@ -22,7 +22,7 @@ class _AddNewsViewState extends State<AddNewsView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Story'),
+          title: const Text('Add News'),
           backgroundColor: Globals.getPrimaryColor(),
           centerTitle: true,
         ),
@@ -80,14 +80,14 @@ class _AddNewsViewState extends State<AddNewsView> {
                   imageFile == null
                       ? Container()
                       : ListTile(
-                          contentPadding: const EdgeInsets.all(0),
+                          contentPadding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                           title: Image.file(imageFile),
                         ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
                     child: TextField(
-                      minLines: 5,
-                      maxLines: 5,
+                      minLines: 3,
+                      maxLines: 3,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
@@ -99,12 +99,12 @@ class _AddNewsViewState extends State<AddNewsView> {
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(width: 1, color: Colors.grey),
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(4),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(width: 1, color: Colors.grey),
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(4),
                         ),
                       ),
                     ),
@@ -116,12 +116,12 @@ class _AddNewsViewState extends State<AddNewsView> {
                       borderRadius: BorderRadius.circular(8.0),
                       color: Globals.getPrimaryColor(),
                       child: MaterialButton(
-                        minWidth: 150,
+                        minWidth: 125,
                         padding:
                             const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                         onPressed: () async {},
                         child: const Text(
-                          "Submit",
+                          "Add",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,

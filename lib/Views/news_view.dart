@@ -1,6 +1,9 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../Services/news_service.dart';
 import '../Util/globals.dart';
 import '../Widget/title_bar.dart';
 import 'add_news.dart';
@@ -22,117 +25,122 @@ class _NewsViewState extends State<NewsView> {
         children: <Widget>[
           TitleBar(widget.key, "News Feed"),
           Expanded(
-              child: Container(
-                  color: Color.fromARGB(255, 230, 230, 230),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListView(
-                      children: <Widget>[
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
-                            child: ListTile(
-                                title: Image.network(
-                                    "https://pbs.twimg.com/media/DkHTw8bX0AAZIae.jpg"),
-                                subtitle: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 8,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+              color: const Color.fromARGB(255, 230, 230, 230),
+              child: FutureBuilder(
+                future: NewsService.getItems(),
+                builder: (context, response) {
+
+                  return RefreshIndicator(
+                    color: Colors.black,
+                    child: ListView.builder(
+                      itemCount: response.data.length,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        dynamic data = response.data[index];
+
+                        String dt = DateFormat.yMMMEd()
+                            .format(DateTime.parse(data["UploadDate"]));
+
+                        String url = "";
+                        String filename = data["FileName"];
+
+                        if (filename != null && filename.isNotEmpty) {
+                          url =
+                              "https://admin.feedthehungerapp.com/api/uploads/" +
+                                  filename + "_256";
+                        }
+
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 1, 8, 1),
+                          child: url.isNotEmpty ? Card(
+                            color: Colors.white,
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Image.network(
+                                      url,
+                                      fit: BoxFit.fill,
                                     ),
-                                    const Text(
-                                      "3/4/2020 - Posted by: Admin",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                    Container(
+                                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 4),
+                                      child: Text(
+                                        dt + " - " + data["Firstname"] + " " + data["Lastname"],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
-                                    const Text("Having a great time!"),
+                                    Text(data["Description"])
                                   ],
                                 )),
-                          ),
-                        ),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
-                            child: ListTile(
-                                title: Image.network(
-                                    "https://ethicalfocus.org/wp-content/uploads/2018/11/Packathon-1.jpg"),
-                                subtitle: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 8,
-                                    ),
-                                    const Text(
-                                      "3/6/2020 - Posted by: Admin",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                          ) : Card(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(Icons.chat,
+                                        color: Colors.deepOrangeAccent,
                                       ),
-                                    ),
-                                    const Text("For all ages!"),
-                                  ],
-                                )),
-                          ),
-                        ),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
-                            child: ListTile(
-                                title: const Icon(Icons.chat_bubble,
-                                    color: Colors.blue),
-                                subtitle: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 8,
-                                    ),
-                                    const Text(
-                                      "3/6/2020 - Posted by: Admin",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const Text(
-                                        "We packed a lot of boxes today. Thanks everyone or your hard work!"),
-                                  ],
-                                )),
-                          ),
-                        ),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
-                            child: ListTile(
-                                title: Image.network(
-                                    "https://christchurchgreenwich.org/wp-content/uploads/2020/06/packathon-enews.jpg"),
-                                subtitle: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 8,
-                                    ),
-                                    const Text(
-                                      "3/7/2020 - Posted by: Admin",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const Text(
-                                        "Working well together on the assembly line."),
-                                  ],
-                                )),
-                          ),
-                        ),
-                      ],
+                                      Container(
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+                                                child: Text(
+                                                  dt + " - " + data["Firstname"] + " " + data["Lastname"],
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 1, 0, 0),
+                                    child: Text(data["Description"]),
+                                  )
+                                ],
+                              ),
+
+                            ),
+
+                          )
+                        );
+                      },
                     ),
-                  ))),
+                    onRefresh: () {
+                      return Future.delayed(
+                        const Duration(seconds: 1),
+                        () {
+                          setState(() {
+
+                          });
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -141,16 +149,15 @@ class _NewsViewState extends State<NewsView> {
         backgroundColor: Globals.getPrimaryColor(),
         onPressed: () async {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddNewsView(),
-              ),
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddNewsView(),
+            ),
           ).then((value) {
             setState(() {
               log("TEST");
             });
           });
-
         },
       ),
     );
