@@ -19,10 +19,12 @@ class ApplicationView extends StatefulWidget {
 class _ApplicationViewState extends State<ApplicationView> {
   static int _currentIndex = 0;
   static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  String libraryInitialFilter = "All";
 
   void setPage(int index)
   {
     setState(() {
+      libraryInitialFilter = "Devotionals";
       _currentIndex = index;
     });
   }
@@ -45,7 +47,9 @@ class _ApplicationViewState extends State<ApplicationView> {
         }
       case 3:
         {
-          return LibraryView(drawerKey: _drawerKey);
+          Widget w = LibraryView(drawerKey: _drawerKey, initialFilter: libraryInitialFilter);
+          libraryInitialFilter = "All";
+          return w;
         }
       case 4:
         {

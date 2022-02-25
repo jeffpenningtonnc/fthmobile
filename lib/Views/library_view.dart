@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Services/library_service.dart';
 import '../Util/globals.dart';
@@ -7,7 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'library_manage_view.dart';
 
 class LibraryView extends StatefulWidget {
-  const LibraryView({Key key, this.drawerKey, this.initialFilter}) : super(key: key);
+  const LibraryView({Key key, this.drawerKey, this.initialFilter})
+      : super(key: key);
 
   final String initialFilter;
   final GlobalKey<ScaffoldState> drawerKey;
@@ -91,7 +93,8 @@ class _LibraryViewState extends State<LibraryView> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FutureBuilder(
-                    future: LibraryService.getItems(0),
+                    future: LibraryService.getItems(
+                        dropdownValue == "Devotionals" ? 1 : 0),
                     builder: (context, response) {
                       if (response.connectionState == ConnectionState.waiting) {
                         return const Spinner();
@@ -116,23 +119,45 @@ class _LibraryViewState extends State<LibraryView> {
                                     "_128";
 
                             return ListTile(
-                              title: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(6),
-                                    image: DecorationImage(
-                                      image: NetworkImage(url),
-                                      fit: BoxFit.fill,
-                                    ),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Color.fromARGB(40, 0, 0, 0),
-                                        offset: Offset(
-                                          6.0,
-                                          6.0,
+                              title: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                        image: DecorationImage(
+                                          image: NetworkImage(url),
+                                          fit: BoxFit.fill,
                                         ),
-                                      )
-                                    ]),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Color.fromARGB(40, 0, 0, 0),
+                                            offset: Offset(
+                                              6.0,
+                                              6.0,
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                  data["Subscribable"] == "1"
+                                      ? Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(4, 0, 4, 12),
+                                            child: Container(
+                                              color: Colors.yellow,
+                                              padding: const EdgeInsets.all(3),
+                                              child: const Text(
+                                                "Subscribe",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(),
+                                ],
                               ),
                               onTap: () async {
                                 await launch(

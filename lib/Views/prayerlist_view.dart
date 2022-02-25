@@ -3,6 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../Util/globals.dart';
 import '../Widget/header.dart';
+import '../Widget/spinner.dart';
 import '../Widget/title_bar.dart';
 
 class PrayerListView extends StatefulWidget {
@@ -33,7 +34,7 @@ class _PrayerListViewState extends State<PrayerListView> {
                 child: const SizedBox(
                   height: 100,
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: Spinner(),
                   ),
                 ),
               ),

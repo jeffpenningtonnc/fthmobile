@@ -71,7 +71,7 @@ class _SubscribedViewState extends State<SubscribedView> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => EventView(
-                                                data: data['Events'][0])),
+                                                data: data)),
                                       );
                                     },
                                     child: Column(

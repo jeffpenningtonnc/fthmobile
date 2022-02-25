@@ -8,14 +8,90 @@ class EventView extends StatefulWidget {
   const EventView({Key key, this.drawerKey, this.data}) : super(key: key);
 
   final GlobalKey<ScaffoldState> drawerKey;
-
   final dynamic data;
 
   @override
   _EventViewState createState() => _EventViewState();
 }
 
+class StepInfo {
+  bool isFirst;
+  bool isLast;
+  String name;
+  String description;
+  String imagePath;
+  bool disabled;
+  Color indicatorColor;
+  Color beforeColor;
+  Color afterColor;
+
+  StepInfo(this.isFirst, this.isLast, this.name, this.description,
+    this.imagePath, this.disabled, this.indicatorColor, this.beforeColor,
+      this.afterColor);
+}
+
 class _EventViewState extends State<EventView> {
+
+  Widget createStep(int step)
+  {
+    int statusId = int.parse(widget.data["EventStatusTypeId"]);
+    StepInfo stepInfo = getStepInfo(step, statusId);
+
+    Widget w = TimelineTile(
+      alignment: TimelineAlign.manual,
+      lineXY: 0.05,
+      isFirst: stepInfo.isFirst,
+      isLast: stepInfo.isLast,
+      indicatorStyle: IndicatorStyle(
+        width: 20,
+        color: stepInfo.indicatorColor,
+        padding: const EdgeInsets.all(6),
+      ),
+      endChild: _RightChild(
+        drawerKey: widget.drawerKey,
+        asset: stepInfo.imagePath,
+        title: stepInfo.name,
+        message: stepInfo.description,
+        disabled: stepInfo.disabled,
+      ),
+      beforeLineStyle: LineStyle(
+        color: stepInfo.beforeColor,
+      ),
+      afterLineStyle: LineStyle(
+        color: stepInfo.afterColor,
+      ),
+    );
+
+    return w;
+  }
+
+  StepInfo getStepInfo(int step, int statusId) {
+    if (step == 1) {
+      Color indicatorColor = statusId == 0 ? Colors.grey : statusId == 1 ? Colors.amber : Colors.lightGreen;
+      Color beforeColor = Colors.black;
+      Color afterColor = statusId == 0 ? Colors.grey : statusId == 1 ? Colors.grey : Colors.lightGreen;
+      return StepInfo(true, false, "Packing", "Upcoming or in progress", "images/status/packing.png", statusId < 1, indicatorColor, beforeColor, afterColor);
+    }
+    else if (step == 2) {
+      Color indicatorColor = statusId == 0 ? Colors.grey : statusId == 2 ? Colors.amber : statusId < 2 ? Colors.grey : Colors.lightGreen;
+      Color beforeColor = statusId == 0 ? Colors.grey : statusId >= 2 ? Colors.lightGreen : Colors.grey;
+      Color afterColor = statusId == 0 ? Colors.grey : statusId > 2 ? Colors.lightGreen : Colors.grey;
+      return StepInfo(false, false, "Warehouse", "Loading trucks for delivery", "images/status/warehouse.png", statusId < 2, indicatorColor, beforeColor, afterColor);
+    }
+    else if (step == 3) {
+      Color indicatorColor = statusId == 0 ? Colors.grey : statusId == 3 ? Colors.amber : statusId < 3 ? Colors.grey : Colors.lightGreen;
+      Color beforeColor = statusId == 0 ? Colors.grey : statusId >= 3 ? Colors.lightGreen : Colors.grey;
+      Color afterColor = statusId == 0 ? Colors.grey : statusId > 3 ? Colors.lightGreen : Colors.grey;
+      return StepInfo(false, false, "Shipping", "Transporting to destination", "images/status/shipping.png", statusId < 3, indicatorColor, beforeColor, afterColor);
+    }
+    else if (step == 4) {
+      Color indicatorColor = statusId == 0 ? Colors.grey : statusId == 4 ? Colors.amber : statusId < 4 ? Colors.grey : Colors.lightGreen;
+      Color beforeColor = statusId == 0 ? Colors.grey : statusId >= 4 ? Colors.lightGreen : Colors.grey;
+      Color afterColor = Colors.grey;
+      return StepInfo(false, true, "Complete", "Food has been delivered", "images/status/complete.png", statusId < 4, indicatorColor, beforeColor, afterColor);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,84 +122,69 @@ class _EventViewState extends State<EventView> {
             color: const Color.fromARGB(255, 230, 230, 230),
             child: Column(
               children: <Widget>[
-                TimelineTile(
-                  alignment: TimelineAlign.manual,
-                  lineXY: 0.05,
-                  isFirst: true,
-                  indicatorStyle: const IndicatorStyle(
-                    width: 20,
-                    color: Colors.lightGreen,
-                    padding: EdgeInsets.all(6),
-                  ),
-                  endChild: _RightChild(
-                    drawerKey: widget.drawerKey,
-                    asset: "images/status/packing.png",
-                    title: 'Packing',
-                    message: 'Upcoming or in progress',
-                  ),
-                  beforeLineStyle: const LineStyle(
-                    color: Colors.lightGreen,
-                  ),
-                ),
-                TimelineTile(
-                  alignment: TimelineAlign.manual,
-                  lineXY: 0.05,
-                  indicatorStyle: const IndicatorStyle(
-                    width: 20,
-                    color: Colors.lightGreen,
-                    padding: EdgeInsets.all(6),
-                  ),
-                  endChild: const _RightChild(
-                    asset:
-                        'images/status/warehouse.png',
-                    title: 'Warehouse',
-                    message: 'Loading trucks for delivery',
-                  ),
-                  beforeLineStyle: const LineStyle(
-                    color: Colors.lightGreen,
-                  ),
-                ),
-                TimelineTile(
-                  alignment: TimelineAlign.manual,
-                  lineXY: 0.05,
-                  indicatorStyle: const IndicatorStyle(
-                    width: 20,
-                    color: Colors.amber,
-                    padding: EdgeInsets.all(6),
-                  ),
-                  endChild: const _RightChild(
-                    asset:
-                        'images/status/shipping.png',
-                    title: 'Shipping',
-                    message: 'Transporting to destination',
-                  ),
-                  beforeLineStyle: const LineStyle(
-                    color: Colors.lightGreen,
-                  ),
-                  afterLineStyle: const LineStyle(
-                    color: Colors.black26,
-                  ),
-                ),
-                TimelineTile(
-                  alignment: TimelineAlign.manual,
-                  lineXY: 0.05,
-                  isLast: true,
-                  indicatorStyle: const IndicatorStyle(
-                    width: 20,
-                    color: Colors.black26,
-                    padding: EdgeInsets.all(6),
-                  ),
-                  endChild: const _RightChild(
-                    disabled: true,
-                    asset:
-                        'images/status/complete.png',
-                    title: 'Complete',
-                    message: 'Food has been delivered',
-                  ),
-                  beforeLineStyle: const LineStyle(
-                    color: Colors.black26,
-                  ),
-                ),
+                createStep(1),
+                createStep(2),
+                createStep(3),
+                createStep(4),
+                // TimelineTile(
+                //   alignment: TimelineAlign.manual,
+                //   lineXY: 0.05,
+                //   indicatorStyle: const IndicatorStyle(
+                //     width: 20,
+                //     color: Colors.lightGreen,
+                //     padding: EdgeInsets.all(6),
+                //   ),
+                //   endChild: const _RightChild(
+                //     asset:
+                //         'images/status/warehouse.png',
+                //     title: 'Warehouse',
+                //     message: 'Loading trucks for delivery',
+                //   ),
+                //   beforeLineStyle: const LineStyle(
+                //     color: Colors.lightGreen,
+                //   ),
+                // ),
+                // TimelineTile(
+                //   alignment: TimelineAlign.manual,
+                //   lineXY: 0.05,
+                //   indicatorStyle: const IndicatorStyle(
+                //     width: 20,
+                //     color: Colors.amber,
+                //     padding: EdgeInsets.all(6),
+                //   ),
+                //   endChild: const _RightChild(
+                //     asset:
+                //         'images/status/shipping.png',
+                //     title: 'Shipping',
+                //     message: 'Transporting to destination',
+                //   ),
+                //   beforeLineStyle: const LineStyle(
+                //     color: Colors.lightGreen,
+                //   ),
+                //   afterLineStyle: const LineStyle(
+                //     color: Colors.black26,
+                //   ),
+                // ),
+                // TimelineTile(
+                //   alignment: TimelineAlign.manual,
+                //   lineXY: 0.05,
+                //   isLast: true,
+                //   indicatorStyle: const IndicatorStyle(
+                //     width: 20,
+                //     color: Colors.black26,
+                //     padding: EdgeInsets.all(6),
+                //   ),
+                //   endChild: const _RightChild(
+                //     disabled: true,
+                //     asset:
+                //         'images/status/complete.png',
+                //     title: 'Complete',
+                //     message: 'Food has been delivered',
+                //   ),
+                //   beforeLineStyle: const LineStyle(
+                //     color: Colors.black26,
+                //   ),
+                // ),
               ],
             ),
           ),
