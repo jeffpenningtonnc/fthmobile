@@ -7,6 +7,7 @@ import '../Widget/header.dart';
 import 'home_view.dart';
 import 'login_view.dart';
 import 'news_view.dart';
+import '../Util/Globals.dart';
 
 class ApplicationView extends StatefulWidget {
   const ApplicationView({Key key}) : super(key: key);
@@ -17,16 +18,43 @@ class ApplicationView extends StatefulWidget {
 
 class _ApplicationViewState extends State<ApplicationView> {
   static int _currentIndex = 0;
-
   static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-  final List<Widget> _children = [
-    HomeView(drawerKey: _drawerKey),
-    NewsView(drawerKey: _drawerKey),
-    SubscribedView(drawerKey: _drawerKey),
-    LibraryView(drawerKey: _drawerKey),
-    DonateView(drawerKey: _drawerKey),
-  ];
+  void setPage(int index)
+  {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  Widget pageCaller(int index)
+  {
+    switch(index)
+    {
+      case 0:
+        {
+          return HomeView(drawerKey: _drawerKey, setPage: setPage);
+        }
+      case 1:
+        {
+          return NewsView(drawerKey: _drawerKey);
+        }
+      case 2:
+        {
+          return SubscribedView(drawerKey: _drawerKey);
+        }
+      case 3:
+        {
+          return LibraryView(drawerKey: _drawerKey);
+        }
+      case 4:
+        {
+          return DonateView(drawerKey: _drawerKey);
+        }
+    }
+
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +148,7 @@ class _ApplicationViewState extends State<ApplicationView> {
         ),
       ),
       body: Container(
-        child: _children[_currentIndex],
+        child: pageCaller(_currentIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

@@ -7,8 +7,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'library_manage_view.dart';
 
 class LibraryView extends StatefulWidget {
-  const LibraryView({Key key, this.drawerKey}) : super(key: key);
+  const LibraryView({Key key, this.drawerKey, this.initialFilter}) : super(key: key);
 
+  final String initialFilter;
   final GlobalKey<ScaffoldState> drawerKey;
 
   @override
@@ -16,7 +17,18 @@ class LibraryView extends StatefulWidget {
 }
 
 class _LibraryViewState extends State<LibraryView> {
-  String dropdownValue = "Books";
+  String dropdownValue = "All";
+
+  @override
+  void initState() {
+    GlobalKey<ScaffoldState> drawerKey = widget.drawerKey;
+
+    if (widget.initialFilter != null && widget.initialFilter.isNotEmpty) {
+      dropdownValue = widget.initialFilter;
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +57,7 @@ class _LibraryViewState extends State<LibraryView> {
                       dropdownValue = newValue;
                     });
                   },
-                  items: <String>['Books', 'Devotionals']
+                  items: <String>['All', 'Devotionals']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
