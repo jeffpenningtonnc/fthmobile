@@ -19,6 +19,11 @@ class _AddNewsViewState extends State<AddNewsView> {
   File imageFile;
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -39,50 +44,95 @@ class _AddNewsViewState extends State<AddNewsView> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Card(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: () async {
-                              final XFile photo = await _picker.pickImage(
-                                  source: ImageSource.camera);
-                              imageFile = File(photo.path);
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded (
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Colors.black26, width: 0.5),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
 
-                              setState(() {
+                                  },
+                                  icon: const Icon(Icons.location_on,
+                                    color: Colors.black,
+                                  ),
+                              ),
+                              Text("Katy, Texas"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: RawMaterialButton(
+                              elevation: 0.0,
+                              child: const Icon(Icons.camera_alt,
+                                color: Colors.white,
+                              ),
+                              onPressed: () async {
+                                final XFile photo = await _picker.pickImage(
+                                    source: ImageSource.camera);
+                                imageFile = File(photo.path);
 
-                              });
-                            },
-                            icon: const Icon(Icons.camera_alt,
-                              size: 32,
+                                setState(() {
+
+                                });
+                              },
+                              constraints: const BoxConstraints.tightFor(
+                                width: 40.0,
+                                height: 40.0,
+                              ),
+                              shape: const CircleBorder(),
+                              fillColor: Colors.black,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () async {
-                              final XFile image = await _picker.pickImage(
-                                  source: ImageSource.gallery);
-                              imageFile = File(image.path);
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: RawMaterialButton(
+                              elevation: 0.0,
+                              child: const Icon(Icons.image,
+                                color: Colors.white,
+                              ),
+                              onPressed: () async {
+                                final XFile image = await _picker.pickImage(
+                                    source: ImageSource.gallery);
+                                imageFile = File(image.path);
 
-                              setState(() {
+                                setState(() {
 
-                              });
-                            },
-                            icon: const Icon(Icons.image,
-                              size: 32,
+                                });
+                              },
+                              constraints: const BoxConstraints.tightFor(
+                                width: 40.0,
+                                height: 40.0,
+                              ),
+                              shape: const CircleBorder(),
+                              fillColor: Colors.black,
                             ),
                           ),
                         ],
                       ),
-                    ),
+
+                    ],
                   ),
                   imageFile == null
                       ? Container()
-                      : ListTile(
-                          contentPadding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                          title: Image.file(imageFile),
-                        ),
+                      : Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.file(imageFile),
+                        )
+                    ,),
+
                   Padding(
                     padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
                     child: TextField(
@@ -98,12 +148,12 @@ class _AddNewsViewState extends State<AddNewsView> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(width: 1, color: Colors.grey),
+                              const BorderSide(width: 1, color: Colors.black26),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(width: 1, color: Colors.grey),
+                              const BorderSide(width: 1, color: Colors.black26),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -111,21 +161,31 @@ class _AddNewsViewState extends State<AddNewsView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Material(
-                      elevation: 5.0,
-                      borderRadius: BorderRadius.circular(8.0),
-                      color: Globals.getPrimaryColor(),
-                      child: MaterialButton(
-                        minWidth: 125,
-                        padding:
-                            const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                        onPressed: () async {},
-                        child: const Text(
-                          "Add",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Material(
+                        elevation: 5.0,
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Globals.getPrimaryColor(),
+                        child: MaterialButton(
+                          minWidth: 125,
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                          onPressed: () async {
+
+                            // if (imageFile != null) {
+                            //   uploadImage();
+                            //   addNews();
+                            // }
+
+                          },
+                          child: const Text(
+                            "Add",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
                           ),
                         ),
                       ),
