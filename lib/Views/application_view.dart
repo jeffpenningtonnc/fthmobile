@@ -156,7 +156,7 @@ class _ApplicationViewState extends State<ApplicationView> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color.fromARGB(255, 142, 197, 95),
+        selectedItemColor: Globals.getPrimaryColor(),
         backgroundColor: Colors.white38,
         onTap: (int index) {
           setState(() {

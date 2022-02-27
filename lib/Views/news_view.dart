@@ -57,7 +57,7 @@ class _NewsViewState extends State<NewsView> {
                           url =
                               "https://admin.feedthehungerapp.com/api/uploads/" +
                                   filename +
-                                  "_256";
+                                  "_512";
                         }
 
                         return Padding(
@@ -87,8 +87,7 @@ class _NewsViewState extends State<NewsView> {
                                           ),
                                         ),
                                         radius: 24,
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 142, 197, 95),
+                                        backgroundColor: Globals.getSecondaryColor(),
                                       ),
                                       Container(
                                         color: Colors.white,

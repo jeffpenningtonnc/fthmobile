@@ -26,6 +26,10 @@ class Globals {
     return const Color.fromARGB(255, 142, 197, 95);
   }
 
+  static Color getSecondaryColor() {
+    return const Color.fromARGB(255, 0, 0, 0);
+  }
+
   static String getAPIKey() {
     return apiKey;
   }
