@@ -20,6 +20,11 @@ class AccountService {
     return "??";
   }
 
+  static String getInitialsFromText(String firstName, String lastName)
+  {
+    return firstName.substring(0, 1) + lastName.substring(0, 1);
+  }
+
   static String getFullName()
   {
     if (firstName.isNotEmpty && lastName.isNotEmpty)

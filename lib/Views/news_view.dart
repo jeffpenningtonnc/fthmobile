@@ -80,7 +80,7 @@ class _NewsViewState extends State<NewsView> {
                                     children: [
                                       CircleAvatar(
                                         child: Text(
-                                          AccountService.getInitials(),
+                                          AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
                                           style: const TextStyle(
                                             fontSize: 20,
                                             color: Colors.white,
@@ -125,12 +125,24 @@ class _NewsViewState extends State<NewsView> {
                                           ),
                                         ),
                                       ),
-                                      const Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                            child: Icon(Icons.keyboard_arrow_down,
-                                              color: Colors.grey,
-                                            ),
+                                      Expanded(
+                                        child: GestureDetector(
+                                          child: const Align(
+                                            alignment: Alignment.topRight,
+                                              child: Icon(Icons.keyboard_arrow_down,
+                                                color: Colors.grey,
+                                              ),
+                                          ),
+                                          onTap: () {
+                                            // showDialog(
+                                            //   context: context,
+                                            //   barrierDismissible: true,
+                                            //   builder: (_) => AlertDialog(
+                                            //     title: Text("Edit Post"),
+                                            //     content: Text("Test"),
+                                            //   ),
+                                            // );
+                                          },
                                         ),
                                       ),
                                     ],
@@ -253,8 +265,11 @@ class TimeAgo {
     //return "";
 
     DateTime notificationDate =
-        DateFormat("yyyy-MM-dd h:mm:ss").parse(dateString);
+        DateFormat("yyyy-MM-dd H:mm:ss").parse(dateString);
+    notificationDate = notificationDate.add(const Duration(hours: 1));
+
     final date2 = DateTime.now();
+
     final difference = date2.difference(notificationDate);
 
     if (difference.inDays > 8) {
