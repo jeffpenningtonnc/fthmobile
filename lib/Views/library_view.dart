@@ -139,24 +139,62 @@ class _LibraryViewState extends State<LibraryView> {
                                           )
                                         ]),
                                   ),
-                                  data["Subscribable"] == "1"
+                                  data["Subscribable"] == "1" &&
+                                          data["UserSubscriptionId"] == null
                                       ? Align(
                                           alignment: Alignment.bottomCenter,
                                           child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(4, 0, 4, 12),
-                                            child: Container(
-                                              color: Colors.yellow,
-                                              padding: const EdgeInsets.all(3),
-                                              child: const Text(
-                                                "Subscribe",
-                                                style: TextStyle(
-                                                  color: Colors.black,
+                                            padding: const EdgeInsets.fromLTRB(
+                                                4, 0, 4, 12),
+                                            child: GestureDetector(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.yellow,
+                                                  borderRadius: BorderRadius.circular(4),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.all(4),
+                                                child: const Text(
+                                                  "Subscribe",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
+                                              onTap: () {},
                                             ),
                                           ),
                                         )
-                                      : Container(),
+                                      : data["Subscribable"] == "1" &&
+                                              data["UserSubscriptionId"] != null
+                                          ? Align(
+                                              alignment: Alignment.bottomCenter,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        4, 0, 4, 12),
+                                                child: GestureDetector(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(4),
+                                                      color: Globals.getPrimaryColor(),
+                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(4),
+                                                    child: const Text(
+                                                      "Subscribed",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onTap: () {},
+                                                ),
+                                              ),
+                                            )
+                                          : Container()
                                 ],
                               ),
                               onTap: () async {
