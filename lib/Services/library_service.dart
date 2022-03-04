@@ -38,6 +38,16 @@ class LibraryService {
     return response;
   }
 
+  static Future getDevotionals() async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString()
+    };
+
+    dynamic response = await HttpService.api('GetLibrarySubscriptions', parameters);
+    return response;
+  }
+
 }
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../Util/globals.dart';
+import '../Widget/devotional_tile.dart';
 import '../Widget/title_bar.dart';
 import 'library_view.dart';
 import 'prayerlist_view.dart';
@@ -85,70 +86,7 @@ class _HomeViewState extends State<HomeView> {
           Expanded(
             child: ListView(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 18, 16, 8),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          widget.setPage(3);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              constraints: const BoxConstraints(
-                                minWidth: 115,
-                                minHeight: 115,
-                                maxWidth: 115,
-                                maxHeight: 115,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset("images/devotions.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Flexible(
-                                child: Column(
-                                  children: const [
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                        child: Text("Daily Devotions",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 24,
-                                            )
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      "Subscribe to receive 30 days of devotions right here within the Feed The Hunger App.",
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text("Subscribe Now >",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )),
-                ),
+                DevotionalTile(setPage: widget.setPage),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
                   child: Container(
@@ -211,7 +149,8 @@ class _HomeViewState extends State<HomeView> {
                             )
                           ],
                         ),
-                      )),
+                      ),
+                  ),
                 ),
               ],
             ),
