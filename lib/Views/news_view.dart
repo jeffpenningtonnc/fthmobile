@@ -126,11 +126,12 @@ class _NewsViewState extends State<NewsView> {
                                       ),
                                       Expanded(
                                         child: GestureDetector(
-                                          child: const Align(
+                                          child: Align(
                                             alignment: Alignment.topRight,
-                                            child: Icon(
-                                              Icons.keyboard_arrow_down,
+                                            child: IconButton(
+                                              icon: const Icon(Icons.keyboard_arrow_down),
                                               color: Colors.grey,
+                                              onPressed: () {},
                                             ),
                                           ),
                                           onTapDown: (TapDownDetails details) {
@@ -139,7 +140,7 @@ class _NewsViewState extends State<NewsView> {
                                             showMenu(
                                               context: context,
                                               elevation: 8.0,
-                                              position: RelativeRect.fromLTRB(offset.dx, offset.dy - 15, 20, 0),
+                                              position: RelativeRect.fromLTRB(offset.dx, offset.dy - 18, 20, 0),
                                               items: [
                                                 PopupMenuItem(
                                                   padding: const EdgeInsets.fromLTRB(12, 2, 0, 4),
