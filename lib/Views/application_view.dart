@@ -1,4 +1,9 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fthmobile/Widget/spinner.dart';
+import 'package:image_picker/image_picker.dart';
 import '../Services/account_service.dart';
 import 'donate_view.dart';
 import 'library_view.dart';
@@ -21,18 +26,27 @@ class _ApplicationViewState extends State<ApplicationView> {
   static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String libraryInitialFilter = "All";
 
-  void setPage(int index)
-  {
+  final ImagePicker _picker = ImagePicker();
+  File imageFile;
+  NetworkImage _profileImage;
+
+  @override
+  void initState() {
+
+    _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
+
+    super.initState();
+  }
+
+  void setPage(int index) {
     setState(() {
       libraryInitialFilter = "Devotionals";
       _currentIndex = index;
     });
   }
 
-  Widget pageCaller(int index)
-  {
-    switch(index)
-    {
+  Widget pageCaller(int index) {
+    switch (index) {
       case 0:
         {
           return HomeView(drawerKey: _drawerKey, setPage: setPage);
@@ -76,16 +90,50 @@ class _ApplicationViewState extends State<ApplicationView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  CircleAvatar(
-                    child: Text(
-                      AccountService.getInitials(),
-                      style: const TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
+                  GestureDetector(
+                    onTap: () async {
+                      final XFile image = await _picker.pickImage(source: ImageSource.gallery);
+                      imageFile = File(image.path);
+
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => AlertDialog(
+                            title: const Text("Uploading Profile Image"),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Spinner(),
+                                ],
+                            ),
+                          ),
+                      );
+
+                      bool result = await AccountService.uploadProfileImage(imageFile, (bool result) {
+
+                        setState(() {
+                          _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
+                        });
+
+                        Navigator.of(context).pop();
+                        Navigator.pop(context);
+                      });
+
+                    },
+                    child: _profileImage == null ? CircleAvatar(
+                      child: Text(
+                        AccountService.getInitials(),
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                        ),
                       ),
+                    ) :
+                    CircleAvatar(
+                      foregroundImage: _profileImage,
+                      radius: 40,
+                      backgroundColor: const Color.fromARGB(255, 142, 197, 95),
                     ),
-                    radius: 40,
-                    backgroundColor: const Color.fromARGB(255, 142, 197, 95),
                   ),
                   const SizedBox(
                     height: 10,
@@ -139,7 +187,6 @@ class _ApplicationViewState extends State<ApplicationView> {
                 children: const <Widget>[Icon(Icons.exit_to_app), Text("Logout")],
               ),
               onTap: () {
-
                 AccountService.logOut();
 
                 Navigator.push(

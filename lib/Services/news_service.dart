@@ -18,6 +18,17 @@ class NewsService {
     return response;
   }
 
+  static Future deleteItem(String eventResourceId) async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString(),
+      'eventResourceId': eventResourceId,
+    };
+
+    dynamic response = await HttpService.api('DeleteNewsItem', parameters);
+    return response;
+  }
+
   static Future uploadFile(File file, int eventId, String message, Function(bool) onUploadProgress) async
   {
     var postUri = Uri.parse("https://admin.feedthehungerapp.com/api/mobile/Upload.php");

@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'http_service.dart';
 import 'preference_service.dart';
 
@@ -56,6 +58,27 @@ class AccountService {
     lastName = response['results']['lastName'].toString();
 
     return true;
+  }
+
+  static Future uploadProfileImage(File file, Function(bool) onUploadProgress) async
+  {
+    var postUri = Uri.parse("https://admin.feedthehungerapp.com/api/mobile/UploadProfileImage.php");
+    var request = http.MultipartRequest("POST", postUri);
+
+    http.MultipartFile multipartFile = await http.MultipartFile.fromPath('file', file.path);
+
+    request.fields['userId'] = AccountService.userId.toString();
+    request.files.add(multipartFile);
+
+    request.send().then((response) {
+      if (response.statusCode == 200) {
+        onUploadProgress(true);
+      }
+      else {
+        onUploadProgress(false);
+      }
+    });
+
   }
 
   static void logOut() {
