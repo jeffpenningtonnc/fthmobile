@@ -139,7 +139,10 @@ class _LibraryViewState extends State<LibraryView> {
                                 ],
                               ),
                               onTap: () async {
-                                await launch("https://admin.feedthehungerapp.com/api/uploads/" + data["FileName"]);
+
+                                if (data["Subscribable"] != "1") {
+                                  await launch("https://admin.feedthehungerapp.com/api/uploads/" + data["FileName"]);
+                                }
                               },
                             );
                           });
