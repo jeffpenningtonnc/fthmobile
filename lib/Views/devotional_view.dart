@@ -35,7 +35,7 @@ class _DevotionalViewState extends State<DevotionalView> {
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(widget.data["Title"],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 28,
                             ),
@@ -47,14 +47,14 @@ class _DevotionalViewState extends State<DevotionalView> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text("by " + widget.data["Author"],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                           )
                         ),
                       ),
                     ),
                     Text(widget.data["Content"],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                       )
                     )

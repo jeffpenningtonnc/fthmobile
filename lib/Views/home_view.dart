@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import '../Util/globals.dart';
 import '../Widget/devotional_tile.dart';
 import '../Widget/title_bar.dart';
-import 'library_view.dart';
 import 'prayerlist_view.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key key, this.drawerKey, this.setPage }) : super(key: key);
+  const HomeView({Key key, this.setPage }) : super(key: key);
 
   final Function(int) setPage;
-  final GlobalKey<ScaffoldState> drawerKey;
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -18,12 +15,9 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   VideoPlayerController controller;
-  GlobalKey<ScaffoldState> drawerKey;
 
   @override
   void initState() {
-    drawerKey = widget.drawerKey;
-
     loadVideoPlayer();
     super.initState();
   }
@@ -45,7 +39,7 @@ class _HomeViewState extends State<HomeView> {
       color: const Color.fromARGB(25, 100, 100, 100),
       child: Column(
         children: <Widget>[
-          TitleBar(widget.key, "Welcome!"),
+          const TitleBar(title: "Welcome!"),
           Stack(
             children: [
               AspectRatio(

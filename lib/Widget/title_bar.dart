@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../Util/globals.dart';
 
 class TitleBar extends StatelessWidget {
-  const TitleBar(Key key, this._title) : super(key: key);
-  final String _title;
+  const TitleBar({Key key, this.title}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class TitleBar extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  _title,
+                  title,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

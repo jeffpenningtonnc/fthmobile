@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import '../Widget/header.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-import 'step_view.dart';
-
 class EventView extends StatefulWidget {
-  const EventView({Key key, this.drawerKey, this.data}) : super(key: key);
+  const EventView({Key key, this.data}) : super(key: key);
 
-  final GlobalKey<ScaffoldState> drawerKey;
   final dynamic data;
 
   @override
@@ -48,7 +45,6 @@ class _EventViewState extends State<EventView> {
         padding: const EdgeInsets.all(6),
       ),
       endChild: _RightChild(
-        drawerKey: widget.drawerKey,
         asset: stepInfo.imagePath,
         title: stepInfo.name,
         message: stepInfo.description,
@@ -97,7 +93,7 @@ class _EventViewState extends State<EventView> {
     return Scaffold(
         body: Column(
       children: <Widget>[
-        Header(widget.key, widget.drawerKey),
+        const Header(),
         const SizedBox(height: 15),
         SizedBox(
             height: 35,
@@ -198,14 +194,12 @@ class _RightChild extends StatelessWidget {
 
   const _RightChild({
     Key key,
-    this.drawerKey,
     this.asset,
     this.title,
     this.message,
     this.disabled = false,
   }) : super(key: key);
 
-  final GlobalKey drawerKey;
   final String asset;
   final String title;
   final String message;

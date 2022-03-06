@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ class ApplicationView extends StatefulWidget {
 
 class _ApplicationViewState extends State<ApplicationView> {
   static int _currentIndex = 0;
-  static final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String libraryInitialFilter = "All";
 
   final ImagePicker _picker = ImagePicker();
@@ -32,7 +30,6 @@ class _ApplicationViewState extends State<ApplicationView> {
 
   @override
   void initState() {
-
     _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
 
     super.initState();
@@ -49,25 +46,25 @@ class _ApplicationViewState extends State<ApplicationView> {
     switch (index) {
       case 0:
         {
-          return HomeView(drawerKey: _drawerKey, setPage: setPage);
+          return HomeView(setPage: setPage);
         }
       case 1:
         {
-          return NewsView(drawerKey: _drawerKey);
+          return const NewsView();
         }
       case 2:
         {
-          return SubscribedView(drawerKey: _drawerKey);
+          return const SubscribedView();
         }
       case 3:
         {
-          Widget w = LibraryView(drawerKey: _drawerKey, initialFilter: libraryInitialFilter);
+          Widget w = LibraryView(initialFilter: libraryInitialFilter);
           libraryInitialFilter = "All";
           return w;
         }
       case 4:
         {
-          return DonateView(drawerKey: _drawerKey);
+          return const DonateView();
         }
     }
 
@@ -81,10 +78,10 @@ class _ApplicationViewState extends State<ApplicationView> {
     return MediaQuery(
       data: mediaQueryData.copyWith(textScaleFactor: 1.0),
       child: Scaffold(
-        key: _drawerKey,
-        appBar: PreferredSize(
-          preferredSize: const Size(double.infinity, 100),
-          child: Header(widget.key, _drawerKey),
+        key: GlobalKey(),
+        appBar: const PreferredSize(
+          preferredSize: Size(double.infinity, 100),
+          child: Header(),
         ),
         drawer: Drawer(
           child: ListView(
@@ -100,43 +97,50 @@ class _ApplicationViewState extends State<ApplicationView> {
                         imageFile = File(image.path);
 
                         showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) => AlertDialog(
-                              title: const Text("Uploading Profile Image"),
-                              content: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Spinner(),
-                                  ],
-                              ),
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => AlertDialog(
+                            title: const Text("Uploading Profile Image"),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Spinner(),
+                              ],
                             ),
+                          ),
                         );
 
                         bool result = await AccountService.uploadProfileImage(imageFile, (bool result) {
-
-                          setState(() {
-                            _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
-                          });
+                          setState(() {});
 
                           Navigator.of(context).pop();
-                          Navigator.pop(context);
+                          //Navigator.pop(context);
                         });
-
                       },
-                      child: _profileImage == null ? CircleAvatar(
-                        child: Text(
-                          AccountService.getInitials(),
-                          style: const TextStyle(
-                            fontSize: 24,
-                            color: Colors.white,
+                      child: CircleAvatar(
+                        child: ClipOval(
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            child: Image.network(
+                              "https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png",
+                              errorBuilder: (context, error, stackTrace) => CircleAvatar(
+                                child: Text(
+                                  AccountService.getInitials(),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                radius: 24,
+                                backgroundColor: Globals.getPrimaryColor(),
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ) :
-                      CircleAvatar(
-                        foregroundImage: _profileImage,
-                        radius: 40,
-                        backgroundColor: const Color.fromARGB(255, 142, 197, 95),
+                        backgroundColor: Colors.transparent,
+                        radius: 24,
                       ),
                     ),
                     const SizedBox(

@@ -26,7 +26,7 @@ class _NewsViewState extends State<NewsView> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          TitleBar(widget.key, "News Feed"),
+          const TitleBar(title: "News Feed"),
           Expanded(
             child: Container(
               padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../Util/globals.dart';
 import '../Widget/title_bar.dart';
 
 class DonateView extends StatefulWidget {
@@ -23,7 +20,7 @@ class _DonateViewState extends State<DonateView> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          TitleBar(widget.key, "Donate"),
+          TitleBar(title: "Donate"),
           Visibility(
             visible: _loading,
             child: Container(

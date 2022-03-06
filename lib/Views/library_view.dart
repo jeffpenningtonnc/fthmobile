@@ -47,7 +47,7 @@ class _LibraryViewState extends State<LibraryView> {
       ),
       child: Column(
         children: <Widget>[
-          TitleBar(widget.key, "Library"),
+          const TitleBar(title: "Library"),
           Card(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

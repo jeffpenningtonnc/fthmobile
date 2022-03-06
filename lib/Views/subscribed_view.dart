@@ -31,7 +31,7 @@ class _SubscribedViewState extends State<SubscribedView> {
       body: Container(
         child: Column(
           children: <Widget>[
-            TitleBar(widget.key, "Organizations Following"),
+            const TitleBar(title: "Organizations Following"),
             Expanded(
                 child: Container(
               constraints: const BoxConstraints.expand(),

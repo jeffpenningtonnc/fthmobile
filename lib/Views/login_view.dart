@@ -75,10 +75,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 const Text(
                   'Sign in',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black45),
                 ),
                 const SizedBox(
                   height: 50,
@@ -88,18 +85,15 @@ class _LoginViewState extends State<LoginView> {
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                      contentPadding:
-                          const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       hintText: "Email",
                       filled: true,
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 2.0),
+                        borderSide: const BorderSide(color: Colors.grey, width: 2.0),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0))),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0))),
                 ),
                 const SizedBox(
                   height: 10,
@@ -114,8 +108,7 @@ class _LoginViewState extends State<LoginView> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 2.0),
+                      borderSide: const BorderSide(color: Colors.grey, width: 2.0),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     filled: true,
@@ -127,9 +120,7 @@ class _LoginViewState extends State<LoginView> {
                         });
                       },
                       child: Icon(
-                        _obscureText
-                            ? FontAwesomeIcons.eye
-                            : FontAwesomeIcons.eyeSlash,
+                        _obscureText ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
                         size: 15.0,
                         color: Colors.black45,
                       ),
@@ -160,8 +151,7 @@ class _LoginViewState extends State<LoginView> {
                             _invalidLogin = false;
                           });
 
-                          bool valid = await AccountService.authenticate(
-                              emailController.text, passwordController.text);
+                          bool valid = await AccountService.authenticate(emailController.text, passwordController.text);
 
                           if (!valid) {
                             setState(() {
@@ -171,15 +161,12 @@ class _LoginViewState extends State<LoginView> {
                           } else {
                             _busy = false;
 
-                            await PreferenceService.setPrefAsString(
-                                "email", emailController.text);
-                            await PreferenceService.setPrefAsString(
-                                "password", passwordController.text);
+                            await PreferenceService.setPrefAsString("email", emailController.text);
+                            await PreferenceService.setPrefAsString("password", passwordController.text);
 
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ApplicationView()),
+                              MaterialPageRoute(builder: (context) => const ApplicationView()),
                             );
                           }
                         },
@@ -197,8 +184,7 @@ class _LoginViewState extends State<LoginView> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const ForgotPassword1View()),
+                          MaterialPageRoute(builder: (context) => const ForgotPassword1View()),
                         );
                       },
                       child: const Padding(

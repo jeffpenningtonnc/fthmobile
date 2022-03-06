@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import '../Widget/header.dart';
 
 class StepView extends StatefulWidget {
-  const StepView(Key key, this._drawerKey) : super(key: key);
-
-  final GlobalKey<ScaffoldState> _drawerKey;
+  const StepView(Key key) : super(key: key);
 
   @override
   _StepViewState createState() => _StepViewState();
@@ -16,7 +14,7 @@ class _StepViewState extends State<StepView> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Header(widget.key, widget._drawerKey),
+          const Header(),
           const SizedBox(height: 15),
           const SizedBox(
               height: 35,
