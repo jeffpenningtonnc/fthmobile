@@ -76,164 +76,169 @@ class _ApplicationViewState extends State<ApplicationView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _drawerKey,
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 100),
-        child: Header(widget.key, _drawerKey),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () async {
-                      final XFile image = await _picker.pickImage(source: ImageSource.gallery);
-                      imageFile = File(image.path);
+    final mediaQueryData = MediaQuery.of(context);
 
-                      showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => AlertDialog(
-                            title: const Text("Uploading Profile Image"),
-                            content: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Spinner(),
-                                ],
+    return MediaQuery(
+      data: mediaQueryData.copyWith(textScaleFactor: 1.0),
+      child: Scaffold(
+        key: _drawerKey,
+        appBar: PreferredSize(
+          preferredSize: const Size(double.infinity, 100),
+          child: Header(widget.key, _drawerKey),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () async {
+                        final XFile image = await _picker.pickImage(source: ImageSource.gallery);
+                        imageFile = File(image.path);
+
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Uploading Profile Image"),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Spinner(),
+                                  ],
+                              ),
                             ),
-                          ),
-                      );
+                        );
 
-                      bool result = await AccountService.uploadProfileImage(imageFile, (bool result) {
+                        bool result = await AccountService.uploadProfileImage(imageFile, (bool result) {
 
-                        setState(() {
-                          _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
+                          setState(() {
+                            _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
+                          });
+
+                          Navigator.of(context).pop();
+                          Navigator.pop(context);
                         });
 
-                        Navigator.of(context).pop();
-                        Navigator.pop(context);
-                      });
-
-                    },
-                    child: _profileImage == null ? CircleAvatar(
-                      child: Text(
-                        AccountService.getInitials(),
-                        style: const TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
+                      },
+                      child: _profileImage == null ? CircleAvatar(
+                        child: Text(
+                          AccountService.getInitials(),
+                          style: const TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),
                         ),
+                      ) :
+                      CircleAvatar(
+                        foregroundImage: _profileImage,
+                        radius: 40,
+                        backgroundColor: const Color.fromARGB(255, 142, 197, 95),
                       ),
-                    ) :
-                    CircleAvatar(
-                      foregroundImage: _profileImage,
-                      radius: 40,
-                      backgroundColor: const Color.fromARGB(255, 142, 197, 95),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    AccountService.getFullName(),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    AccountService.userEmail,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    Text(
+                      AccountService.getFullName(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      AccountService.userEmail,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                ),
               ),
-              decoration: const BoxDecoration(
-                color: Colors.black,
-              ),
-            ),
-            // ListTile(
-            //   title: Row(
-            //     children: const <Widget>[Icon(Icons.person), Text("Profile")],
-            //   ),
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const LoginView()),
-            //     );
-            //   },
-            // ),
-            // ListTile(
-            //   title: Row(
-            //     children: const <Widget>[Icon(Icons.lock), Text("Change Password")],
-            //   ),
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const LoginView()),
-            //     );
-            //   },
-            // ),
-            ListTile(
-              title: Row(
-                children: const <Widget>[Icon(Icons.exit_to_app), Text("Logout")],
-              ),
-              onTap: () {
-                AccountService.logOut();
+              // ListTile(
+              //   title: Row(
+              //     children: const <Widget>[Icon(Icons.person), Text("Profile")],
+              //   ),
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => const LoginView()),
+              //     );
+              //   },
+              // ),
+              // ListTile(
+              //   title: Row(
+              //     children: const <Widget>[Icon(Icons.lock), Text("Change Password")],
+              //   ),
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => const LoginView()),
+              //     );
+              //   },
+              // ),
+              ListTile(
+                title: Row(
+                  children: const <Widget>[Icon(Icons.exit_to_app), Text("Logout")],
+                ),
+                onTap: () {
+                  AccountService.logOut();
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginView()),
-                );
-              },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        body: Container(
+          child: pageCaller(_currentIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Globals.getPrimaryColor(),
+          backgroundColor: Colors.white38,
+          onTap: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          currentIndex: _currentIndex,
+          // this will be set when a new tab is tapped
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.comment),
+              label: "News",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.event),
+              label: "Events",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.library_books),
+              label: "Library",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money),
+              label: "Donate",
             ),
           ],
         ),
-      ),
-      body: Container(
-        child: pageCaller(_currentIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Globals.getPrimaryColor(),
-        backgroundColor: Colors.white38,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        currentIndex: _currentIndex,
-        // this will be set when a new tab is tapped
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.comment),
-            label: "News",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: "Events",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
-            label: "Library",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.attach_money),
-            label: "Donate",
-          ),
-        ],
       ),
     );
   }
