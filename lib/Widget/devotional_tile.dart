@@ -28,23 +28,10 @@ class _DevotionalTileState extends State<DevotionalTile> {
         }
 
         dynamic data = {};
-        int day = 0;
 
         bool hasDevotionals = true;
         if (response.data != null && response.data.length > 0) {
           data = response.data[0];
-
-          DateTime subscriptionDate = DateFormat("yyyy-MM-dd H:mm:ss").parse(data["SubscriptionDate"]);
-          final today = DateTime.now();
-          final diff = today.difference(subscriptionDate);
-          day = diff.inDays + 1;
-
-          if (day > 30)
-          {
-            double f = day / 30;
-            int d = f.truncate();
-            day = day - (d * 30);
-          }
         }
         else {
           hasDevotionals = false;
@@ -78,7 +65,7 @@ class _DevotionalTileState extends State<DevotionalTile> {
                             topRight: Radius.circular(8),
                         ),
                         image: DecorationImage(
-                          image: NetworkImage("https://admin.feedthehungerapp.com/api/devotionals/" + data["ResourceId"] + "/" + day.toString() + "_small.jpg"),
+                          image: NetworkImage("https://admin.feedthehungerapp.com/api/devotionals/" + data["ResourceId"] + "/" + data["Day"] + "_small.jpg"),
                           fit: BoxFit.fill,
                         )),
                   ),

@@ -23,7 +23,7 @@ class _DevotionalViewState extends State<DevotionalView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network("https://admin.feedthehungerapp.com/api/devotionals/" + widget.data["ResourceId"] + "/" + widget.data["ResourcePosition"] + ".jpg"),
+            Image.network("https://admin.feedthehungerapp.com/api/devotionals/" + widget.data["ResourceId"] + "/" + widget.data["Day"] + ".jpg"),
             SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

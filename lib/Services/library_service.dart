@@ -44,7 +44,7 @@ class LibraryService {
       'userId': AccountService.userId.toString()
     };
 
-    dynamic response = await HttpService.api('GetLibrarySubscriptions', parameters);
+    dynamic response = await HttpService.api('GetLibraryDevotionals', parameters);
     return response;
   }
 
