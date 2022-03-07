@@ -148,11 +148,13 @@ class _NewsViewState extends State<NewsView> {
                                                   value: 1,
                                                   enabled: false,
                                                   child: Row(
-                                                    children: const [
-                                                      Icon(Icons.edit),
+                                                    children: [
+                                                      const Icon(Icons.edit),
                                                       Padding(
-                                                        padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                                                        child: Text("Edit"),
+                                                        padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                                                        child: Text("Edit",
+                                                          textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                                                        ),
                                                       ),
                                                     ],
                                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -163,11 +165,13 @@ class _NewsViewState extends State<NewsView> {
                                                   height: 14,
                                                   value: 1,
                                                   child: Row(
-                                                    children: const [
-                                                      Icon(Icons.delete_rounded),
+                                                    children: [
+                                                      const Icon(Icons.delete_rounded),
                                                       Padding(
-                                                        padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                                                        child: Text("Delete"),
+                                                        padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                                                        child: Text("Delete",
+                                                          textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                                                        ),
                                                       ),
                                                     ],
                                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -190,7 +194,7 @@ class _NewsViewState extends State<NewsView> {
                                                                 backgroundColor: Colors.white,
                                                                 side: const BorderSide(color: Colors.grey, width: 1),
                                                               ),
-                                                              child: Text("Cancel"),
+                                                              child: const Text("Cancel"),
                                                               onPressed: () {
                                                                 Navigator.of(context).pop();
                                                               },

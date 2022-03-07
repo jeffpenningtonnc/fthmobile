@@ -90,103 +90,108 @@ class _EventViewState extends State<EventView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: <Widget>[
-        const Header(),
-        const SizedBox(height: 15),
-        SizedBox(
-            height: 35,
-            width: double.infinity,
-            child: DecoratedBox(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 142, 197, 95),
-              ),
-              child: Center(
-                child: Text(
-                  widget.data["Name"],
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.white),
+    final mediaQueryData = MediaQuery.of(context);
+
+    return MediaQuery(
+      data: mediaQueryData.copyWith(textScaleFactor: 1.0),
+      child: Scaffold(
+          body: Column(
+        children: <Widget>[
+          const Header(),
+          const SizedBox(height: 15),
+          SizedBox(
+              height: 35,
+              width: double.infinity,
+              child: DecoratedBox(
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 142, 197, 95),
                 ),
+                child: Center(
+                  child: Text(
+                    widget.data["Name"],
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white),
+                  ),
+                ),
+              )),
+          Container(color: const Color.fromARGB(255, 230, 230, 230), height: 20),
+          Expanded(
+            child: Container(
+              color: const Color.fromARGB(255, 230, 230, 230),
+              child: Column(
+                children: <Widget>[
+                  createStep(1),
+                  createStep(2),
+                  createStep(3),
+                  createStep(4),
+                  // TimelineTile(
+                  //   alignment: TimelineAlign.manual,
+                  //   lineXY: 0.05,
+                  //   indicatorStyle: const IndicatorStyle(
+                  //     width: 20,
+                  //     color: Colors.lightGreen,
+                  //     padding: EdgeInsets.all(6),
+                  //   ),
+                  //   endChild: const _RightChild(
+                  //     asset:
+                  //         'images/status/warehouse.png',
+                  //     title: 'Warehouse',
+                  //     message: 'Loading trucks for delivery',
+                  //   ),
+                  //   beforeLineStyle: const LineStyle(
+                  //     color: Colors.lightGreen,
+                  //   ),
+                  // ),
+                  // TimelineTile(
+                  //   alignment: TimelineAlign.manual,
+                  //   lineXY: 0.05,
+                  //   indicatorStyle: const IndicatorStyle(
+                  //     width: 20,
+                  //     color: Colors.amber,
+                  //     padding: EdgeInsets.all(6),
+                  //   ),
+                  //   endChild: const _RightChild(
+                  //     asset:
+                  //         'images/status/shipping.png',
+                  //     title: 'Shipping',
+                  //     message: 'Transporting to destination',
+                  //   ),
+                  //   beforeLineStyle: const LineStyle(
+                  //     color: Colors.lightGreen,
+                  //   ),
+                  //   afterLineStyle: const LineStyle(
+                  //     color: Colors.black26,
+                  //   ),
+                  // ),
+                  // TimelineTile(
+                  //   alignment: TimelineAlign.manual,
+                  //   lineXY: 0.05,
+                  //   isLast: true,
+                  //   indicatorStyle: const IndicatorStyle(
+                  //     width: 20,
+                  //     color: Colors.black26,
+                  //     padding: EdgeInsets.all(6),
+                  //   ),
+                  //   endChild: const _RightChild(
+                  //     disabled: true,
+                  //     asset:
+                  //         'images/status/complete.png',
+                  //     title: 'Complete',
+                  //     message: 'Food has been delivered',
+                  //   ),
+                  //   beforeLineStyle: const LineStyle(
+                  //     color: Colors.black26,
+                  //   ),
+                  // ),
+                ],
               ),
-            )),
-        Container(color: const Color.fromARGB(255, 230, 230, 230), height: 20),
-        Expanded(
-          child: Container(
-            color: const Color.fromARGB(255, 230, 230, 230),
-            child: Column(
-              children: <Widget>[
-                createStep(1),
-                createStep(2),
-                createStep(3),
-                createStep(4),
-                // TimelineTile(
-                //   alignment: TimelineAlign.manual,
-                //   lineXY: 0.05,
-                //   indicatorStyle: const IndicatorStyle(
-                //     width: 20,
-                //     color: Colors.lightGreen,
-                //     padding: EdgeInsets.all(6),
-                //   ),
-                //   endChild: const _RightChild(
-                //     asset:
-                //         'images/status/warehouse.png',
-                //     title: 'Warehouse',
-                //     message: 'Loading trucks for delivery',
-                //   ),
-                //   beforeLineStyle: const LineStyle(
-                //     color: Colors.lightGreen,
-                //   ),
-                // ),
-                // TimelineTile(
-                //   alignment: TimelineAlign.manual,
-                //   lineXY: 0.05,
-                //   indicatorStyle: const IndicatorStyle(
-                //     width: 20,
-                //     color: Colors.amber,
-                //     padding: EdgeInsets.all(6),
-                //   ),
-                //   endChild: const _RightChild(
-                //     asset:
-                //         'images/status/shipping.png',
-                //     title: 'Shipping',
-                //     message: 'Transporting to destination',
-                //   ),
-                //   beforeLineStyle: const LineStyle(
-                //     color: Colors.lightGreen,
-                //   ),
-                //   afterLineStyle: const LineStyle(
-                //     color: Colors.black26,
-                //   ),
-                // ),
-                // TimelineTile(
-                //   alignment: TimelineAlign.manual,
-                //   lineXY: 0.05,
-                //   isLast: true,
-                //   indicatorStyle: const IndicatorStyle(
-                //     width: 20,
-                //     color: Colors.black26,
-                //     padding: EdgeInsets.all(6),
-                //   ),
-                //   endChild: const _RightChild(
-                //     disabled: true,
-                //     asset:
-                //         'images/status/complete.png',
-                //     title: 'Complete',
-                //     message: 'Food has been delivered',
-                //   ),
-                //   beforeLineStyle: const LineStyle(
-                //     color: Colors.black26,
-                //   ),
-                // ),
-              ],
             ),
           ),
-        ),
-      ],
-    ));
+        ],
+      )),
+    );
   }
 }
 
