@@ -55,7 +55,7 @@ class _DevotionalViewState extends State<DevotionalView> {
                     ),
                     Text(widget.data["Content"],
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                       )
                     )
                   ],

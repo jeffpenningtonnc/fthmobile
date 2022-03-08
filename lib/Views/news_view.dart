@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -77,20 +78,25 @@ class _NewsViewState extends State<NewsView> {
                                           child: Container(
                                             width: 50,
                                             height: 50,
-                                            child: Image.network(
-                                              "https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png",
-                                              errorBuilder: (context, error, stackTrace) => CircleAvatar(
-                                                child: Text(
-                                                  AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                radius: 24,
-                                                backgroundColor: Globals.getPrimaryColor(),
-                                              ),
-                                              fit: BoxFit.cover,
+                                            child: ExtendedImage.network("https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png",
+                                              cache: true,
+                                              loadStateChanged: (ExtendedImageState state) {
+                                                switch (state.extendedImageLoadState) {
+                                                  case LoadState.failed:
+                                                    return CircleAvatar(
+                                                      child: Text(
+                                                        AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
+                                                        style: const TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      radius: 24,
+                                                      backgroundColor: Globals.getPrimaryColor(),
+                                                    );
+                                                }
+                                                return Container();
+                                              },
                                             ),
                                           ),
                                         ),
@@ -126,12 +132,13 @@ class _NewsViewState extends State<NewsView> {
                                       ),
                                       Expanded(
                                         child: GestureDetector(
-                                          child: Align(
-                                            alignment: Alignment.topRight,
-                                            child: IconButton(
-                                              icon: const Icon(Icons.keyboard_arrow_down),
-                                              color: Colors.grey,
-                                              onPressed: () {},
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(12.0),
+                                            child: Align(
+                                              alignment: Alignment.topRight,
+                                              child: Icon(Icons.keyboard_arrow_down,
+                                                color: Colors.grey,
+                                              ),
                                             ),
                                           ),
                                           onTapDown: (TapDownDetails details) {
