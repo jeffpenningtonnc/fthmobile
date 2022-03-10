@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../Services/account_service.dart';
-import '../Services/event_service.dart';
-import '../Widget/subscribe_icon.dart';
+import 'package:fthmobile/Services/library_service.dart';
+import 'package:fthmobile/Views/Library/library_subscribe_button.dart';
+import '../../Services/account_service.dart';
+import '../../Services/event_service.dart';
+import '../Events/subscribe_icon.dart';
 
 class LibraryManageView extends StatefulWidget {
   const LibraryManageView({Key key}) : super(key: key);
@@ -11,7 +13,6 @@ class LibraryManageView extends StatefulWidget {
 }
 
 class _LibraryManageViewState extends State<LibraryManageView> {
-
   TextEditingController searchController = TextEditingController();
   String _searchText = "";
   bool _nearMe = true;
@@ -20,7 +21,7 @@ class _LibraryManageViewState extends State<LibraryManageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manage Subscriptions'),
+        title: const Text('Library Subscriptions'),
         backgroundColor: const Color.fromARGB(255, 142, 197, 95),
         centerTitle: true,
       ),
@@ -28,13 +29,10 @@ class _LibraryManageViewState extends State<LibraryManageView> {
         children: <Widget>[
           Expanded(
             child: FutureBuilder(
-                future: EventService.findLiveEvents(_searchText, _nearMe, AccountService.userId),
+                future: LibraryService.getSubscriptions(),
                 builder: (context, response) {
                   if (response.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.black)));
+                    return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black)));
                   }
 
                   if (response.data == null || response.data.length == 0) {
@@ -45,27 +43,24 @@ class _LibraryManageViewState extends State<LibraryManageView> {
                     itemCount: response.data.length,
                     itemBuilder: (context, index) {
                       dynamic data = response.data[index];
-                      String url =
-                          "https://admin.feedthehungerapp.com/api/uploads/" +
-                              data["FileName"] +
-                              "_256";
+                      String url = "https://admin.feedthehungerapp.com/api/uploads/" + data["ThumbFileName"] + "_256";
+
                       return Card(
                           child: ListTile(
                         leading: ConstrainedBox(
                           constraints: const BoxConstraints(
-                            minWidth: 44,
-                            minHeight: 44,
-                            maxWidth: 64,
-                            maxHeight: 64,
+                            minHeight: 50,
                           ),
-                          child: Image.network(url, fit: BoxFit.cover),
+                          child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Image.network(url, fit: BoxFit.cover),
+                          ),
                         ),
-                        title: Text(data["Name"]),
-                        subtitle: Text(data["City"] + ", " + data["State"]),
-                        trailing: SubscribeIcon(
-                            widget.key,
-                            int.parse(data["OrganizationId"]),
-                            data["Subscribed"] != null),
+                        title: Text(data["Title"]),
+                        trailing: Padding(
+                          padding: const EdgeInsets.fromLTRB(2, 10, 2, 10),
+                          child: LibrarySubscribeButton(data: data),
+                        ),
                       ));
                     },
                   );

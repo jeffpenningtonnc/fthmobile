@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import '../Services/account_service.dart';
-import '../Util/globals.dart';
-import 'otp_view.dart';
-import '../Widget/error_box.dart';
-import '../Widget/spinner.dart';
+import 'package:fthmobile/Common/error_box.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Login/otp_view.dart';
 
 class ForgotPassword1View extends StatefulWidget {
   const ForgotPassword1View({Key key, this.title}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fthmobile/Common/title_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../Widget/title_bar.dart';
 
 class DonateView extends StatefulWidget {
   const DonateView({Key key, this.drawerKey}) : super(key: key);

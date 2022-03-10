@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Util/Globals.dart';
+import '../../Util/Globals.dart';
 
 class DevotionalView extends StatefulWidget {
   const DevotionalView({Key key, this.data}) : super(key: key);

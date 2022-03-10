@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../Services/account_service.dart';
-import '../Util/globals.dart';
-import '../Widget/error_box.dart';
-import '../Widget/spinner.dart';
-import 'signup4_view.dart';
-import '../Services/preference_service.dart';
+import 'package:fthmobile/Common/error_box.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Services/preference_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Login/signup4_view.dart';
 
 class Signup3View extends StatefulWidget {
   const Signup3View({Key key, this.email, this.otp}) : super(key: key);

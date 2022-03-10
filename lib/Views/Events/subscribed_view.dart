@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
-import '../Widget/spinner.dart';
-import '/Services/account_service.dart';
-import '/Services/event_service.dart';
-import '/Util/globals.dart';
-import '/Views/event_view.dart';
-import '/Views/subscribe_view.dart';
-import '/Widget/title_bar.dart';
-import '/Widget/white_spinner.dart';
-import '../Services/account_service.dart';
-import '../Services/event_service.dart';
-import '../Util/globals.dart';
-import 'event_view.dart';
-import 'subscribe_view.dart';
-import '../Widget/title_bar.dart';
-import '../Widget/white_spinner.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Common/title_bar.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Services/event_service.dart';
+import 'package:fthmobile/Util/globals.dart';
+import 'package:fthmobile/Views/Events/event_view.dart';
+import 'package:fthmobile/Views/Events/subscribe_view.dart';
 
 class SubscribedView extends StatefulWidget {
   const SubscribedView({Key key, this.drawerKey}) : super(key: key);

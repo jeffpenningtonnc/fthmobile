@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../Util/globals.dart';
-import '../Views/forgot_password2_view.dart';
-import '../Views/signup2_view.dart';
-import '../Widget/error_box.dart';
-import '../Widget/spinner.dart';
-import '../Services/account_service.dart';
+import 'package:fthmobile/Common/error_box.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Login/forgot_password2_view.dart';
+import 'package:fthmobile/Views/Login/signup2_view.dart';
 
 class OTPView extends StatefulWidget {
   const OTPView({Key key, this.email, this.action}) : super(key: key);

@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fthmobile/Widget/spinner.dart';
+import 'package:fthmobile/Common/header.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Donate/donate_view.dart';
+import 'package:fthmobile/Views/Events/subscribed_view.dart';
+import 'package:fthmobile/Views/Home/home_view.dart';
+import 'package:fthmobile/Views/Library/library_view.dart';
+import 'package:fthmobile/Views/Login/login_view.dart';
+import 'package:fthmobile/Views/News/news_view.dart';
 import 'package:image_picker/image_picker.dart';
-import '../Services/account_service.dart';
-import 'donate_view.dart';
-import 'library_view.dart';
-import 'subscribed_view.dart';
-import '../Widget/header.dart';
-import 'home_view.dart';
-import 'login_view.dart';
-import 'news_view.dart';
-import '../Util/Globals.dart';
 
 class ApplicationView extends StatefulWidget {
   const ApplicationView({Key key}) : super(key: key);

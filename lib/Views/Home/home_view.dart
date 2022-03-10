@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fthmobile/Common/title_bar.dart';
 import 'package:video_player/video_player.dart';
-import '../Widget/devotional_tile.dart';
-import '../Widget/title_bar.dart';
+import 'devotional_tile.dart';
 import 'prayerlist_view.dart';
 
 class HomeView extends StatefulWidget {

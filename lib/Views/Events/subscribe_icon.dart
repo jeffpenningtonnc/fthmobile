@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Services/event_service.dart';
+import '../../Services/event_service.dart';
 
 class SubscribeIcon extends StatefulWidget {
   const SubscribeIcon(Key key, this.organizationId, this.subscribed) : super(key: key);

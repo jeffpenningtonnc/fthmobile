@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../Util/globals.dart';
 import 'login_view.dart';
-import '../Util/globals.dart';
 
-class Signup4View extends StatefulWidget {
-  const Signup4View({Key key}) : super(key: key);
+class ForgotPassword3View extends StatefulWidget {
+  const ForgotPassword3View({Key key}) : super(key: key);
 
   @override
-  _Signup4ViewState createState() => _Signup4ViewState();
+  _ForgotPassword3ViewState createState() => _ForgotPassword3ViewState();
 }
 
-class _Signup4ViewState extends State<Signup4View> {
+class _ForgotPassword3ViewState extends State<ForgotPassword3View> {
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _Signup4ViewState extends State<Signup4View> {
                   height: 70,
                 ),
                 const Text(
-                  "Registration",
+                  "Password Changed",
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class _Signup4ViewState extends State<Signup4View> {
                   height: 20,
                 ),
                 const Text(
-                  "You are registered!",
+                  "Your password has been changed.",
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.black45),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Services/news_service.dart';
+import '../../Services/news_service.dart';
 
 class LikeNews extends StatefulWidget {
   const LikeNews({Key key, this.data}) : super(key: key);

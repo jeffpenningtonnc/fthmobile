@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Util/Globals.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import '../Util/globals.dart';
-import '../Widget/header.dart';
-import '../Widget/spinner.dart';
-import '../Widget/title_bar.dart';
 
 class PrayerListView extends StatefulWidget {
   const PrayerListView({Key key}) : super(key: key);

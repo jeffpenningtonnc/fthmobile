@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../Util/globals.dart';
-import '../Widget/error_box.dart';
-import 'signup1_view.dart';
-import '../Services/account_service.dart';
-import '../Services/preference_service.dart';
-import 'application_view.dart';
-import 'forgot_password1_view.dart';
-import '../Widget/spinner.dart';
+import 'package:fthmobile/Common/error_box.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Services/preference_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Login/forgot_password1_view.dart';
+import 'package:fthmobile/Views/Login/signup1_view.dart';
+import 'package:fthmobile/Views/application_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key key, this.title}) : super(key: key);

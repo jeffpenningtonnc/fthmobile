@@ -1,17 +1,14 @@
 import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fthmobile/Widget/like_news.dart';
+import 'package:fthmobile/Common/title_bar.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Services/news_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/News/add_news.dart';
+import 'package:fthmobile/Views/News/like_news.dart';
 import 'package:intl/intl.dart';
-import '../Services/account_service.dart';
-import '../Services/news_service.dart';
-import '../Util/globals.dart';
-import '../Widget/spinner.dart';
-import '../Widget/title_bar.dart';
-import 'add_news.dart';
 
 class NewsView extends StatefulWidget {
   const NewsView({Key key, this.drawerKey}) : super(key: key);

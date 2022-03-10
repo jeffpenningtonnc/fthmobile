@@ -1,11 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:fthmobile/Views/devotional_view.dart';
-import 'package:fthmobile/Widget/spinner.dart';
+import 'package:fthmobile/Views/Home/devotional_view.dart';
 import 'package:intl/intl.dart';
 
-import '../Services/library_service.dart';
+import '../../Services/library_service.dart';
 
 class DevotionalTile extends StatefulWidget {
   const DevotionalTile({Key key, this.setPage}) : super(key: key);

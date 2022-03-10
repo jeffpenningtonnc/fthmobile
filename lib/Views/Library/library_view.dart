@@ -1,14 +1,12 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fthmobile/Widget/library_subscribe_button.dart';
-import '../Services/library_service.dart';
-import '../Util/globals.dart';
-import '../Widget/spinner.dart';
-import '../Widget/title_bar.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Common/title_bar.dart';
+import 'package:fthmobile/Services/library_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Library/library_manage_view.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'library_manage_view.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({Key key, this.drawerKey, this.initialFilter}) : super(key: key);
@@ -65,7 +63,8 @@ class _LibraryViewState extends State<LibraryView> {
                   items: <String>['All', 'Devotionals'].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value,
+                      child: Text(
+                        value,
                         textScaleFactor: MediaQuery.of(context).textScaleFactor,
                       ),
                     );
@@ -76,7 +75,11 @@ class _LibraryViewState extends State<LibraryView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const LibraryManageView()),
-                    );
+                    ).then((value) {
+                      setState(() {
+
+                      });
+                    });
                   },
                   child: Row(
                     children: const [
@@ -84,7 +87,7 @@ class _LibraryViewState extends State<LibraryView> {
                         padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
                         child: Icon(Icons.settings),
                       ),
-                      Text("Manage Subscriptions")
+                      Text("Subscriptions")
                     ],
                   ),
                 ),
@@ -94,7 +97,7 @@ class _LibraryViewState extends State<LibraryView> {
           Expanded(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(30, 20, 20, 0),
                 child: FutureBuilder(
                     future: LibraryService.getItems(dropdownValue == "Devotionals" ? 1 : 0),
                     builder: (context, response) {
@@ -107,45 +110,67 @@ class _LibraryViewState extends State<LibraryView> {
 
                       return GridView.builder(
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
+                            crossAxisCount: 2,
                             mainAxisSpacing: 30,
+                            crossAxisSpacing: 20,
+                            childAspectRatio: .75,
                           ),
                           itemCount: response.data.length,
                           shrinkWrap: false,
                           itemBuilder: (context, index) {
                             dynamic data = response.data[index];
-                            String url = "https://admin.feedthehungerapp.com/api/uploads/" + data["ThumbFileName"] + "_128";
+                            String url = "https://admin.feedthehungerapp.com/api/uploads/" + data["ThumbFileName"] + "_256";
+                            bool isSubscribed = data["UserSubscriptionId"] != null;
 
-                            return ListTile(
-                              title: Stack(
-                                children: [
-                                  Container(
+                            return Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(6),
-                                        image: DecorationImage(
-                                          image: NetworkImage(url),
-                                          fit: BoxFit.fill,
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Color.fromARGB(40, 0, 0, 0),
+                                          offset: Offset(
+                                            8.0,
+                                            8.0,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    child: GestureDetector(
+                                      child: ClipRRect(
+                                        child: Image.network(
+                                          url,
+                                          filterQuality: FilterQuality.high,
                                         ),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Color.fromARGB(40, 0, 0, 0),
-                                            offset: Offset(
-                                              6.0,
-                                              6.0,
-                                            ),
-                                          )
-                                        ]),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      onTap: () async {
+                                        await launch("https://admin.feedthehungerapp.com/api/uploads/" + data["FileName"]);
+                                      },
+                                    ),
                                   ),
-                                  LibrarySubscribeButton(data: data),
-                                ],
-                              ),
-                              onTap: () async {
-
-                                if (data["Subscribable"] != "1") {
-                                  await launch("https://admin.feedthehungerapp.com/api/uploads/" + data["FileName"]);
-                                }
-                              },
+                                ),
+                                isSubscribed
+                                    ? Align(
+                                        alignment: Alignment.topRight,
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(0, 10, 32, 0),
+                                          child: CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor: Globals.getPrimaryColor(),
+                                            child: const Icon(
+                                              Icons.check_circle,
+                                              color: Colors.white,
+                                              size: 29,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Container()
+                              ],
                             );
                           });
                     }),

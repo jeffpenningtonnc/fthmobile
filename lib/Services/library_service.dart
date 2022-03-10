@@ -14,6 +14,16 @@ class LibraryService {
     return response;
   }
 
+  static Future getSubscriptions() async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString(),
+    };
+
+    dynamic response = await HttpService.api('GetLibrarySubscriptions', parameters);
+    return response;
+  }
+
   static Future subscribe(String resourceID) async {
 
     Map<String, String> parameters = {

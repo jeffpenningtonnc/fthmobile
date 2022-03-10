@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:fthmobile/Views/find_organization_view.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Events/find_organization_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fthmobile/Services/news_service.dart';
 
-import '../Util/globals.dart';
-import '../Widget/spinner.dart';
 
 class AddNewsView extends StatefulWidget {
   const AddNewsView({

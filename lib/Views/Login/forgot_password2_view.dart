@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../Util/globals.dart';
-import 'signup3_view.dart';
-import '../Widget/error_box.dart';
-import '../Widget/spinner.dart';
-import '../Services/account_service.dart';
+import 'package:fthmobile/Common/error_box.dart';
+import 'package:fthmobile/Common/spinner.dart';
+import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Services/preference_service.dart';
+import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Views/Login/forgot_password3_view.dart';
 
-class Signup2View extends StatefulWidget {
-  const Signup2View({Key key, this.email, this.otp}) : super(key: key);
+class ForgotPassword2View extends StatefulWidget {
+  const ForgotPassword2View({Key key, this.email, this.otp}) : super(key: key);
 
   final String email;
   final String otp;
 
   @override
-  _Signup2ViewState createState() => _Signup2ViewState();
+  _ForgotPassword2ViewState createState() => _ForgotPassword2ViewState();
 }
 
-class _Signup2ViewState extends State<Signup2View> {
+class _ForgotPassword2ViewState extends State<ForgotPassword2View> {
   bool _busy = false;
   bool _obscureText = true;
   String _errorMessage = "";
@@ -53,7 +54,7 @@ class _Signup2ViewState extends State<Signup2View> {
                   height: 70,
                 ),
                 const Text(
-                  "Create Password",
+                  "Change Password",
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -63,7 +64,7 @@ class _Signup2ViewState extends State<Signup2View> {
                   height: 20,
                 ),
                 const Text(
-                  "Please create your password below.  Passwords must be at least six characters long.",
+                  "Please enter your new password below.  Passwords must be atleast six characters long.",
                   style: TextStyle(fontSize: 18, color: Colors.black45),
                 ),
                 const SizedBox(
@@ -74,17 +75,16 @@ class _Signup2ViewState extends State<Signup2View> {
                   obscureText: _obscureText,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: "Password",
+                    hintText: "New Password",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 2.0),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     filled: true,
                     fillColor: Colors.white,
+                    focusedBorder:OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.grey, width: 2.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                     suffixIcon: InkWell(
                       onTap: () async {
                         setState(() {
@@ -113,13 +113,12 @@ class _Signup2ViewState extends State<Signup2View> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 2.0),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
                     filled: true,
                     fillColor: Colors.white,
+                    focusedBorder:OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.grey, width: 2.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                     suffixIcon: InkWell(
                       onTap: () async {
                         setState(() {
@@ -137,7 +136,7 @@ class _Signup2ViewState extends State<Signup2View> {
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -175,7 +174,7 @@ class _Signup2ViewState extends State<Signup2View> {
                           if (password1Controller.text.trim().length < 6) {
                             setState(() {
                               _errorMessage =
-                                  "Password must be at least 6 characters long.";
+                                  "Password must be atleast 6 characters long.";
                               _busy = false;
                             });
 
@@ -201,11 +200,13 @@ class _Signup2ViewState extends State<Signup2View> {
                           });
 
                           if (passwordChanged) {
+
+                            await PreferenceService.setPrefAsString("email", widget.email);
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Signup3View(
-                                      email: widget.email, otp: widget.otp)),
+                                  builder: (context) => const ForgotPassword3View()),
                             );
                           } else {
                             setState(() {
@@ -235,12 +236,9 @@ class _Signup2ViewState extends State<Signup2View> {
                   ),
                 ),
                 Visibility(
-                  visible: _busy && _errorMessage.isNotEmpty,
-                  child: SizedBox(
-                    height: 40,
-                    child: ErrorBox(errorMsg: _errorMessage),
-                  ),
-                ),
+                  visible: _errorMessage.isNotEmpty,
+                  child: ErrorBox(errorMsg: _errorMessage),
+                )
               ],
             ),
           ),
