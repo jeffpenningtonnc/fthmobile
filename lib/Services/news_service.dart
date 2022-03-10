@@ -29,6 +29,18 @@ class NewsService {
     return response;
   }
 
+  static Future likeItem(String eventResourceId, bool isLike) async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString(),
+      'eventResourceId': eventResourceId,
+      'like': isLike ? "1" : "0"
+    };
+
+    dynamic response = await HttpService.api('LikeNewsItem', parameters);
+    return response;
+  }
+
   static Future uploadFile(File file, int eventId, String message, Function(bool) onUploadProgress) async
   {
     var postUri = Uri.parse("https://admin.feedthehungerapp.com/api/mobile/Upload.php");

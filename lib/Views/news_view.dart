@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fthmobile/Widget/like_news.dart';
 import 'package:intl/intl.dart';
 import '../Services/account_service.dart';
 import '../Services/news_service.dart';
@@ -261,19 +262,7 @@ class _NewsViewState extends State<NewsView> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Row(
-                                              children: const [
-                                                Icon(Icons.thumb_up_alt_outlined, color: Colors.grey),
-                                                Padding(
-                                                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                                                  child: Text("Like",
-                                                      style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Colors.grey,
-                                                      )),
-                                                ),
-                                              ],
-                                            ),
+                                            LikeNews(data: data),
                                             Row(
                                               children: const [
                                                 Icon(Icons.comment, color: Colors.grey),
