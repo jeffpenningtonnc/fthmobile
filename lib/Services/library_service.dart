@@ -58,6 +58,17 @@ class LibraryService {
     return response;
   }
 
+  static Future getDevotional(int resourceId, int day) async {
+
+    Map<String, String> parameters = {
+      'resourceId': resourceId.toString(),
+      'day': day.toString()
+    };
+
+    dynamic response = await HttpService.api('GetLibraryDevotional', parameters);
+    return response;
+  }
+
 }
 
 
