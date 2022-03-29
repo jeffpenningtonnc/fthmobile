@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fthmobile/Services/library_service.dart';
-import '../../Util/Globals.dart';
+import 'package:fthmobile/Util/Globals.dart';
 
 class DevotionalView extends StatefulWidget {
   const DevotionalView({Key key, this.data}) : super(key: key);
@@ -39,8 +39,8 @@ class _DevotionalViewState extends State<DevotionalView> {
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
                     child: Container(
-                      width: 40,
-                      height: 30,
+                      width: 50,
+                      height: 40,
                       color: const Color.fromARGB(150, 0, 0, 0),
                       child: const Icon(
                         Icons.arrow_back_ios_outlined,
@@ -71,8 +71,8 @@ class _DevotionalViewState extends State<DevotionalView> {
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     child: Container(
-                      width: 40,
-                      height: 30,
+                      width: 50,
+                      height: 40,
                       color: const Color.fromARGB(150, 0, 0, 0),
                       child: const Icon(
                         Icons.arrow_forward_ios_outlined,
@@ -86,8 +86,8 @@ class _DevotionalViewState extends State<DevotionalView> {
 
                       int day = int.parse( data["Day"]);
                       day = day + 1;
-                      if (day > 30) {
-                        day = 30;
+                      if (day > 32) {
+                        day = 32;
                       }
 
                       dynamic devo = await LibraryService.getDevotional(resourceId, day);
@@ -132,19 +132,19 @@ class _DevotionalViewState extends State<DevotionalView> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 8, 0, 18),
-                      child: Text(data["Scripture"] + " - " + data["ScriptureRef"],
+                      child: data["Scripture"].toString().length > 0 ? Text(data["Scripture"] + " - " + data["ScriptureRef"],
                           style: const TextStyle(
                             fontSize: 16,
                             fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.bold,
                           )
-                      ),
+                      ) : Container(),
                     ),
                     Text(data["Content"],
                       style: const TextStyle(
                         fontSize: 16,
                       )
-                    )
+                    ),
                   ],
                 ),
               ),
