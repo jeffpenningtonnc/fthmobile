@@ -117,21 +117,25 @@ class _NewsViewState extends State<NewsView> {
                                               Align(
                                                 alignment: Alignment.center,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                                  child: Text(
-                                                    data["Firstname"] + " " + data["Lastname"],
-                                                    style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
+                                                  padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        data["Firstname"] + " " + data["Lastname"],
+                                                        style: const TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Text("  " + dt),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
-                                              Text(
-                                                  data["Organization"]
-                                              ),
                                               Padding(
-                                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                                child: Text(dt),
+                                                padding: const EdgeInsets.fromLTRB(0, 4, 0, 0),
+                                                child: Text(
+                                                    data["Organization"]
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -342,9 +346,10 @@ class TimeAgo {
     final date2 = DateTime.now();
 
     final difference = date2.difference(notificationDate);
+    String formattedDate = DateFormat("M/d/yyyy").format(notificationDate);
 
     if (difference.inDays > 8) {
-      return dateString;
+      return formattedDate;
     } else if ((difference.inDays / 7).floor() >= 1) {
       return (numericDates) ? '1 week ago' : 'Last week';
     } else if (difference.inDays >= 2) {
