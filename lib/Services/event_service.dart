@@ -1,6 +1,10 @@
+import 'package:fthmobile/Services/account_service.dart';
+
 import 'http_service.dart';
 
 class EventService {
+
+  static int selectedNewsEvent = 0;
 
   static Future getSubscribedOrganizations(int userId) async {
 
@@ -9,6 +13,17 @@ class EventService {
     };
 
     dynamic response = await HttpService.api('GetSubscribedOrganizations', parameters);
+
+    return response;
+  }
+
+  static Future getNewsEventsList() async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString()
+    };
+
+    dynamic response = await HttpService.api('GetNewsEventsList', parameters);
 
     return response;
   }

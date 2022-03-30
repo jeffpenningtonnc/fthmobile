@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fthmobile/Common/header.dart';
 import 'package:fthmobile/Common/spinner.dart';
 import 'package:fthmobile/Services/account_service.dart';
+import 'package:fthmobile/Services/event_service.dart';
 import 'package:fthmobile/Util/Globals.dart';
 import 'package:fthmobile/Views/Donate/donate_view.dart';
 import 'package:fthmobile/Views/Events/subscribed_view.dart';
@@ -31,7 +32,6 @@ class _ApplicationViewState extends State<ApplicationView> {
   @override
   void initState() {
     _profileImage = NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + AccountService.userId.toString() + ".png");
-
     super.initState();
   }
 

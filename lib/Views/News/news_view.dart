@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fthmobile/Common/title_bar.dart';
@@ -91,6 +92,11 @@ class _NewsViewState extends State<NewsView> {
                                                       ),
                                                       radius: 24,
                                                       backgroundColor: Globals.getPrimaryColor(),
+                                                    );
+                                                  case LoadState.completed:
+                                                    return CircleAvatar(
+                                                      backgroundColor: Colors.white,
+                                                      backgroundImage: NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png"),
                                                     );
                                                 }
                                                 return Container();
@@ -233,8 +239,8 @@ class _NewsViewState extends State<NewsView> {
                                   url.isNotEmpty
                                       ? Padding(
                                           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                                          child: Image.network(
-                                            url,
+                                          child: CachedNetworkImage(
+                                            imageUrl: url,
                                             fit: BoxFit.fill,
                                           ),
                                         )
@@ -312,7 +318,7 @@ class _NewsViewState extends State<NewsView> {
             ),
           ).then((value) {
             setState(() {
-              log("TEST");
+
             });
           });
         },

@@ -41,6 +41,18 @@ class NewsService {
     return response;
   }
 
+  static Future addMessage(int eventId, String message) async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString(),
+      'eventId': eventId.toString(),
+      'message': message
+    };
+
+    dynamic response = await HttpService.api('AddMessage', parameters);
+    return response;
+  }
+
   static Future uploadFile(File file, int eventId, String message, Function(bool) onUploadProgress) async
   {
     var postUri = Uri.parse("https://admin.feedthehungerapp.com/api/mobile/Upload.php");
