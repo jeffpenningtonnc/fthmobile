@@ -117,7 +117,7 @@ class _NewsViewState extends State<NewsView> {
                                               Align(
                                                 alignment: Alignment.center,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                                   child: Text(
                                                     data["Firstname"] + " " + data["Lastname"],
                                                     style: const TextStyle(
@@ -126,8 +126,11 @@ class _NewsViewState extends State<NewsView> {
                                                   ),
                                                 ),
                                               ),
+                                              Text(
+                                                  data["Organization"]
+                                              ),
                                               Padding(
-                                                padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+                                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                                 child: Text(dt),
                                               ),
                                             ],
