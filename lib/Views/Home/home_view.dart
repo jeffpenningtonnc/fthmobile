@@ -22,6 +22,12 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   void loadVideoPlayer() {
     controller = VideoPlayerController.asset('images/fth-drawing.mp4');
     controller.addListener(() {

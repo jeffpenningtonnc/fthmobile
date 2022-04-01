@@ -5,6 +5,7 @@ import 'package:fthmobile/Util/Globals.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fthmobile/Services/news_service.dart';
+import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 
 class AddNewsView extends StatefulWidget {
   const AddNewsView({
@@ -108,7 +109,7 @@ class _AddNewsViewState extends State<AddNewsView> {
                                       ),
                                       FutureBuilder(
                                         future: EventService.getNewsEventsList(),
-                                        builder: (context, response) {
+                                        builder: (evtContext, response) {
                                           List<Organization> organizations = [];
 
                                           if (response.data == null) {
@@ -278,7 +279,9 @@ class _AddNewsViewState extends State<AddNewsView> {
                                         uploading = true;
                                       });
 
-                                      bool result = await NewsService.uploadFile(imageFile, _selectedEvent, messageController.text, (bool result) {
+                                      File rotatedImage = await FlutterExifRotation.rotateAndSaveImage(path: imageFile.path);
+
+                                      bool result = await NewsService.uploadFile(rotatedImage, _selectedEvent, messageController.text, (bool result) {
                                         setState(() {
                                           uploading = false;
                                         });

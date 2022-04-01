@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fthmobile/Common/title_bar.dart';
 import 'package:fthmobile/Services/account_service.dart';
@@ -55,7 +54,8 @@ class _NewsViewState extends State<NewsView> {
                           url = "https://admin.feedthehungerapp.com/api/uploads/" + filename + "_512";
                         }
 
-                        return Padding(
+                        return
+                          Padding(
                           padding: const EdgeInsets.fromLTRB(8, 1, 8, 1),
                           child: Card(
                             shape: RoundedRectangleBorder(
@@ -74,32 +74,22 @@ class _NewsViewState extends State<NewsView> {
                                     children: [
                                       CircleAvatar(
                                         child: ClipOval(
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: ExtendedImage.network("https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png",
-                                              cache: true,
-                                              loadStateChanged: (ExtendedImageState state) {
-                                                switch (state.extendedImageLoadState) {
-                                                  case LoadState.failed:
-                                                    return CircleAvatar(
-                                                      child: Text(
-                                                        AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
-                                                        style: const TextStyle(
-                                                          fontSize: 20,
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                      radius: 24,
-                                                      backgroundColor: Globals.getPrimaryColor(),
-                                                    );
-                                                  case LoadState.completed:
-                                                    return CircleAvatar(
-                                                      backgroundColor: Colors.white,
-                                                      backgroundImage: NetworkImage("https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png"),
-                                                    );
-                                                }
-                                                return Container();
+                                            child: Image.network("https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png",
+                                              errorBuilder: (BuildContext errContext, Object exception, StackTrace stackTrace) {
+                                                return CircleAvatar(
+                                                  child: Text(
+                                                    AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
+                                                    style: const TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  radius: 24,
+                                                  backgroundColor: Globals.getPrimaryColor(),
+                                                );
                                               },
                                             ),
                                           ),
