@@ -18,6 +18,16 @@ class NewsService {
     return response;
   }
 
+  static Future getComments(int eventResourceId) async {
+
+    Map<String, String> parameters = {
+      'eventResourceId': eventResourceId.toString()
+    };
+
+    dynamic response = await HttpService.api('GetComments', parameters);
+    return response;
+  }
+
   static Future deleteItem(String eventResourceId) async {
 
     Map<String, String> parameters = {
@@ -50,6 +60,18 @@ class NewsService {
     };
 
     dynamic response = await HttpService.api('AddMessage', parameters);
+    return response;
+  }
+
+  static Future addComment(int eventResourceId, String comment) async {
+
+    Map<String, String> parameters = {
+      'userId': AccountService.userId.toString(),
+      'eventResourceId': eventResourceId.toString(),
+      'comment': comment
+    };
+
+    dynamic response = await HttpService.api('AddComment', parameters);
     return response;
   }
 

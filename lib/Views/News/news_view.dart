@@ -1,13 +1,14 @@
 import 'dart:developer';
-
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fthmobile/Common/title_bar.dart';
 import 'package:fthmobile/Services/account_service.dart';
 import 'package:fthmobile/Services/news_service.dart';
 import 'package:fthmobile/Util/Globals.dart';
+import 'package:fthmobile/Util/time.dart';
 import 'package:fthmobile/Views/News/add_news.dart';
-import 'package:fthmobile/Views/News/like_news.dart';
+import 'package:fthmobile/Views/News/new_actions.dart';
 import 'package:intl/intl.dart';
 
 class NewsView extends StatefulWidget {
@@ -22,6 +23,7 @@ class NewsView extends StatefulWidget {
 class _NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -64,7 +66,7 @@ class _NewsViewState extends State<NewsView> {
                             ),
                             color: Colors.white,
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
@@ -246,41 +248,7 @@ class _NewsViewState extends State<NewsView> {
                                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                                     child: Text(data["Description"]),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            width: 1,
-                                            color: Colors.black26,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            LikeNews(data: data),
-                                            Row(
-                                              children: const [
-                                                Icon(Icons.comment, color: Colors.grey),
-                                                Padding(
-                                                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                                                  child: Text("Comment",
-                                                      style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Colors.grey,
-                                                      )),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  NewsActions(data: data)
                                 ],
                               ),
                             ),
@@ -303,61 +271,28 @@ class _NewsViewState extends State<NewsView> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.add),
-        label: const Text('Add'),
-        backgroundColor: Globals.getPrimaryColor(),
-        onPressed: () async {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddNewsView(),
-            ),
-          ).then((value) {
-            setState(() {
+      floatingActionButton: KeyboardVisibilityBuilder(builder: (context, visible) {
+        return visible ? Container() : FloatingActionButton.extended(
+          icon: const Icon(Icons.add),
+          label: const Text('Add'),
+          backgroundColor: Globals.getPrimaryColor(),
+          onPressed: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddNewsView(),
+              ),
+            ).then((value) {
+              setState(() {
 
+              });
             });
-          });
-        },
-      ),
+          },
+        );
+      }),
+
     );
   }
 }
 
-class TimeAgo {
-  static String timeAgoSinceDate(String dateString, {bool numericDates = true}) {
-    log(dateString);
 
-    //return "";
-
-    DateTime notificationDate = DateFormat("yyyy-MM-dd H:mm:ss").parse(dateString);
-    notificationDate = notificationDate.add(const Duration(hours: 1));
-
-    final date2 = DateTime.now();
-
-    final difference = date2.difference(notificationDate);
-    String formattedDate = DateFormat("M/d/yyyy").format(notificationDate);
-
-    if (difference.inDays > 8) {
-      return formattedDate;
-    } else if ((difference.inDays / 7).floor() >= 1) {
-      return (numericDates) ? '1 week ago' : 'Last week';
-    } else if (difference.inDays >= 2) {
-      return '${difference.inDays} days ago';
-    } else if (difference.inDays >= 1) {
-      return (numericDates) ? '1 day ago' : 'Yesterday';
-    } else if (difference.inHours >= 2) {
-      return '${difference.inHours} hours ago';
-    } else if (difference.inHours >= 1) {
-      return (numericDates) ? '1 hour ago' : 'An hour ago';
-    } else if (difference.inMinutes >= 2) {
-      return '${difference.inMinutes} minutes ago';
-    } else if (difference.inMinutes >= 1) {
-      return (numericDates) ? '1 minute ago' : 'A minute ago';
-    } else if (difference.inSeconds >= 3) {
-      return '${difference.inSeconds} seconds ago';
-    } else {
-      return 'Just now';
-    }
-  }
-}

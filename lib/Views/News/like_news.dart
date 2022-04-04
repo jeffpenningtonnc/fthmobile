@@ -40,7 +40,12 @@ class _LikeNewsState extends State<LikeNews> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-              child: likes > 0 ? Text("(" + likes.toString() + ")") : const Text(""),
+              child: likes > 0 ? Text("(" + likes.toString() + ")",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey
+                )
+              ) : const Text(""),
             ),
           ],
         ),
