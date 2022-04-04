@@ -19,6 +19,13 @@ class NewsActions extends StatefulWidget {
 class _NewsActionsState extends State<NewsActions> {
   TextEditingController commentsController = TextEditingController();
   dynamic comments = [];
+  int numComments;
+
+  @override
+  void initState() {
+    numComments = int.parse(widget.data["comments"]);
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -28,8 +35,6 @@ class _NewsActionsState extends State<NewsActions> {
 
   @override
   Widget build(BuildContext context) {
-
-    int numComments = int.parse(widget.data["comments"]);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -68,20 +73,18 @@ class _NewsActionsState extends State<NewsActions> {
                         ),
                       ),
                       onTap: () async {
-
                         dynamic _comments = await NewsService.getComments(int.parse(widget.data["EventResourceId"]));
 
                         setState(() {
                           comments = _comments;
                         });
-                      }
-                  ),
+                      }),
                 ],
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 4, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
             child: Container(
               decoration: const BoxDecoration(
                 border: Border(
@@ -95,88 +98,123 @@ class _NewsActionsState extends State<NewsActions> {
           ),
           ListView.builder(
             shrinkWrap: true,
-            physics:const NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: comments.length,
             itemBuilder: (context, index) {
               dynamic data = comments[index];
               String dt = TimeAgo.timeAgoSinceDate(data["Created"]);
 
-              return Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 1,
-                      color: Colors.black12,
+              return Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                  tileColor: const Color.fromARGB(50, 210, 210, 210),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                      color: Colors.transparent,
+                      width: 0,
                     ),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      child: ClipOval(
-                        child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Image.network("https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png",
-                            errorBuilder: (BuildContext errContext, Object exception, StackTrace stackTrace) {
-                              return CircleAvatar(
-                                child: Text(
-                                  AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
+                  leading: CircleAvatar(
+                    child: ClipOval(
+                      child: SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: Image.network(
+                          "https://admin.feedthehungerapp.com/api/profile/profile_" + data["UserId"] + ".png",
+                          errorBuilder: (BuildContext errContext, Object exception, StackTrace stackTrace) {
+                            return CircleAvatar(
+                              child: Text(
+                                AccountService.getInitialsFromText(data["Firstname"], data["Lastname"]),
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
                                 ),
-                                radius: 24,
-                                backgroundColor: Globals.getPrimaryColor(),
-                              );
-                            },
-                          ),
+                              ),
+                              radius: 24,
+                              backgroundColor: Globals.getPrimaryColor(),
+                            );
+                          },
                         ),
                       ),
-                      backgroundColor: Colors.transparent,
-                      radius: 24,
                     ),
-                    SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(4, 14, 0, 14),
-                        child: Column(
+                    backgroundColor: Colors.transparent,
+                    radius: 24,
+                  ),
+                  title: Row(
+                    children: [
+                      Text(
+                        data["Firstname"] + " " + data["Lastname"],
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "  " + dt,
+                        style: const TextStyle(fontSize: 13),
+                      ),
+                    ],
+                  ),
+                  subtitle: Text(
+                    data["Comment"],
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  trailing: IconButton(
+                      onPressed: () async {
 
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
-                              child: Row(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(data["Firstname"] + " " + data["Lastname"],
-                                        style: const TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text("  " + dt,
-                                        style: const TextStyle(
-                                            fontSize: 13
-                                        ),
-                                      ),
-                                    ],
+                        Future<void>.delayed(
+                          const Duration(),
+                              () => showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            barrierColor: Colors.black26,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Delete Comment"),
+                              content: const Text("Are you sure you wish to delete this comment?"),
+                              actions: [
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    primary: Colors.black,
+                                    backgroundColor: Colors.white,
+                                    side: const BorderSide(color: Colors.grey, width: 1),
                                   ),
-                                ],
-                              ),
+                                  child: const Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                MaterialButton(
+                                  color: Colors.red,
+                                  child: const Text("Delete",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      )),
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+
+                                    await NewsService.deleteComment(int.parse(data["UserCommentId"]));
+                                    dynamic _comments = await NewsService.getComments(int.parse(widget.data["EventResourceId"]));
+
+                                    setState(() {
+                                      comments = _comments;
+                                      numComments = comments.length;
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
-                            Text(data["Comment"],
-                              style: const TextStyle(
-                                fontSize: 12,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                        ),
-                      ),
-                    ),
-                  ],
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        size: 14,
+                      )),
                 ),
               );
             },
@@ -226,7 +264,10 @@ class _NewsActionsState extends State<NewsActions> {
                     dynamic _comments = await NewsService.getComments(int.parse(widget.data["EventResourceId"]));
                     setState(() {
                       comments = _comments;
+                      numComments = comments.length;
                     });
+
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                   },
                   icon: Icon(Icons.send,
@@ -236,7 +277,6 @@ class _NewsActionsState extends State<NewsActions> {
               ],
             ),
           ),
-
         ],
       ),
     );

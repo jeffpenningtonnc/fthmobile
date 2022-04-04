@@ -28,6 +28,16 @@ class NewsService {
     return response;
   }
 
+  static Future deleteComment(int userCommentId) async {
+
+    Map<String, String> parameters = {
+      'userCommentId': userCommentId.toString(),
+    };
+
+    dynamic response = await HttpService.api('DeleteComment', parameters);
+    return response;
+  }
+
   static Future deleteItem(String eventResourceId) async {
 
     Map<String, String> parameters = {
